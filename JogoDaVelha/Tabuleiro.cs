@@ -8,18 +8,38 @@ namespace JogoDaVelha
 {
     internal class Tabuleiro
     {
+        // Usuário escolher letra X ou O
+        public static char escolhaLetraJogador;
+
         // # Iniciar Game
         public static void IniciarGame()
         {
             // # Criação do 1 e 2 jogador, sem nome e com pontuação 0
-            Jogador jogador1 = new Jogador("", 0);
-            Jogador jogador2 = new Jogador("", 0);
+            Jogador jogador1 = new Jogador("",'O', 0);
+            Jogador jogador2 = new Jogador("",'O', 0);
 
             Console.Write("\nDigite o nome do 1 jogador: ");
             jogador1.nome = Console.ReadLine();
 
             Console.Write("Digite o nome do 2 jogador: ");
             jogador2.nome = Console.ReadLine();
+            
+            Console.Write("\nJogador 1 qual você quer ser? letra X ou O: ");
+            escolhaLetraJogador = char.Parse(Console.ReadLine());
+
+            if(escolhaLetraJogador == 'X')
+            {
+                jogador1.letraJogo = 'X';
+                jogador2.letraJogo = 'O';
+            }
+            else
+            {
+                jogador2.letraJogo = 'O';
+                jogador2.letraJogo = 'X';
+            }
+
+            Console.WriteLine($"\nJogador 1 {jogador1.nome} começa com {jogador1.letraJogo}");
+            Console.WriteLine($"\nJogador 2 {jogador2.nome} começa com {jogador2.letraJogo}");
         }
 
         // # Criar a Matriz - 3 linhas e 3 colunas
@@ -58,6 +78,8 @@ namespace JogoDaVelha
             Console.WriteLine($" {tabuleiro[1,0]}  | {tabuleiro[1,1]} |  {tabuleiro[1,2]}");
             Console.WriteLine($" {tabuleiro[2,0]}  | {tabuleiro[2,1]} |  {tabuleiro[2,2]}");
         }
+
+
 
 
         // # Dar opção pro usuário qual valor da matriz ele quer prencher exemplo:

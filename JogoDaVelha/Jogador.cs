@@ -11,11 +11,13 @@ namespace JogoDaVelha
         // # Variáveis públicas internas da classe Usuário
         public string nome;
         public int pontuacao;
+        public char letraJogo;
 
-        public Jogador(string nome, int pontuacao) 
+        public Jogador(string nome, char letraJogo, int pontuacao) 
         {
             this.nome = nome;
             this.pontuacao = pontuacao;
+            this.letraJogo = letraJogo;
         }
     }
 }

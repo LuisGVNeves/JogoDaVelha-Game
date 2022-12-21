@@ -22,14 +22,17 @@ namespace JogoDaVelha
 
                 if (escolhaUsuario == "SIM")
                 {
-                    // # Iniciar Game
-                    Tabuleiro.IniciarGame();
+                    // # Iniciar a entrada inicial do Game
+                    Tabuleiro.IniciarEntradaDoJogo();
 
                     // # Preencher o tabuleiro com os números
                     Tabuleiro.PreencherTabuleiro();
 
                     // # Chamar a Função de chamar o tabuleiro para jogar
                     Tabuleiro.MostrarTabuleiro();
+
+                    // # Iniciar o jogo
+                    Tabuleiro.IniciarJogo();
 
                     break;
                 }

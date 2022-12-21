@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JogoDaVelha;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,15 +10,15 @@ namespace JogoDaVelha
     internal class Tabuleiro
     {
         // Usuário escolher letra X ou O
-        public static char escolhaLetraJogador;
+        public static string escolhaLetraJogador;
+        
+        // # Criação do 1 e 2 jogador, sem nome e com pontuação 0
+        public static Jogador jogador1 = new Jogador("","", 0);
+        public static Jogador jogador2 = new Jogador("","", 0);
 
-        // # Iniciar Game
-        public static void IniciarGame()
+        // # Iniciar entrada do Game
+        public static void IniciarEntradaDoJogo()
         {
-            // # Criação do 1 e 2 jogador, sem nome e com pontuação 0
-            Jogador jogador1 = new Jogador("",'O', 0);
-            Jogador jogador2 = new Jogador("",'O', 0);
-
             Console.Write("\nDigite o nome do 1 jogador: ");
             jogador1.nome = Console.ReadLine();
 
@@ -25,17 +26,17 @@ namespace JogoDaVelha
             jogador2.nome = Console.ReadLine();
             
             Console.Write("\nJogador 1 qual você quer ser? letra X ou O: ");
-            escolhaLetraJogador = char.Parse(Console.ReadLine());
+            escolhaLetraJogador = Console.ReadLine();
 
-            if(escolhaLetraJogador == 'X')
+            if(escolhaLetraJogador == "X")
             {
-                jogador1.letraJogo = 'X';
-                jogador2.letraJogo = 'O';
+                jogador1.letraJogo = "X";
+                jogador2.letraJogo = "O";
             }
             else
             {
-                jogador2.letraJogo = 'O';
-                jogador2.letraJogo = 'X';
+                jogador2.letraJogo = "O";
+                jogador2.letraJogo = "X";
             }
 
             Console.WriteLine($"\nJogador 1 {jogador1.nome} começa com {jogador1.letraJogo}");
@@ -80,17 +81,35 @@ namespace JogoDaVelha
         }
 
 
+        // # Dar opção pro usuário qual valor da matriz ele quer prencher :
+        public static void IniciarJogo()
+        {
+            Console.Write("\nJogador 1 - escolha o valor do tabuleiro que você quer preencher: ");
+            string escolhaJogador1 = Console.ReadLine();
+            
+            /*
+                - Aqui eu vou percorrer a matriz, e comparar e ver se é igual a escolha do jogador
+                se for, eu vou substituir o número pela letra e mostrar o tabuleiro de novo
+            */
+            for (int linhas = 0; linhas < 3; linhas++)
+            {
+                for (int colunas = 0; colunas < 3; colunas++)
+                {
+                    if (tabuleiro[linhas,colunas] == escolhaJogador1)
+                    {
+                        tabuleiro[linhas, colunas] = jogador1.letraJogo;
+                        MostrarTabuleiro();
+                    }
+                }
+            }
 
-
-        // # Dar opção pro usuário qual valor da matriz ele quer prencher exemplo:
-
+        }
 
         /*
          
             0 | 1 | 2 
             3 | 4 | 5 
             6 | 7 | 8 
-            prompt - voce deseja ser o X ou O: X
             prompt - qual opcao deseja escolher: 0
 
             X | 1 | 2 

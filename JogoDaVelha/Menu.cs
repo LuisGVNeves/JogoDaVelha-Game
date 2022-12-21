@@ -39,6 +39,8 @@ namespace JogoDaVelha
                     jogador2.nome = Console.ReadLine();
 
                     // # Chamar a Função de chamar o tabuleiro para jogar
+                    Tabuleiro.CriarTabuleiro();
+
                     break;
                 }
                 else

@@ -11,15 +11,9 @@ namespace JogoDaVelha
         // # Variável escolha do usuário
         public static string escolhaUsuario;
 
-
         // # Método mostrar Menu
         public static void MostrarMenu()
         {
-            Console.ForegroundColor= ConsoleColor.Black;
-            Console.BackgroundColor= ConsoleColor.Red;
-            Console.WriteLine("-----------------  BEM-VINDO AO JOGO DA VELHA  -----------------\n");
-            Console.ResetColor();
-
             // # True até ser usuário não querer jogar 
             while (true)
             {
@@ -28,18 +22,14 @@ namespace JogoDaVelha
 
                 if (escolhaUsuario == "SIM")
                 {
-                    // # Criação do 1 e 2 jogador, sem nome e com pontuação 0
-                    Jogador jogador1 = new Jogador("",0);
-                    Jogador jogador2 = new Jogador("",0);
+                    // # Iniciar Game
+                    Tabuleiro.IniciarGame();
 
-                    Console.Write("\nDigite o nome do 1 jogador: ");
-                    jogador1.nome = Console.ReadLine();
-
-                    Console.Write("Digite o nome do 2 jogador: ");
-                    jogador2.nome = Console.ReadLine();
+                    // # Preencher o tabuleiro com os números
+                    Tabuleiro.PreencherTabuleiro();
 
                     // # Chamar a Função de chamar o tabuleiro para jogar
-                    Tabuleiro.CriarTabuleiro();
+                    Tabuleiro.MostrarTabuleiro();
 
                     break;
                 }

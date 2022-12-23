@@ -12,7 +12,6 @@ namespace JogoDaVelha
         // # Criar a Matriz - 3 linhas e 3 colunas
         public static string[,] tabuleiro = new string[3, 3];
 
-
         // # Método que preenche tabuleiro com números, para o usuário preencher com X ou O
         public static void PreencherTabuleiro()
         {
@@ -39,7 +38,6 @@ namespace JogoDaVelha
 		    }
         }
 
-
         // # Método Mostrar Tabuleiro
         public static void MostrarTabuleiro()
         {
@@ -51,11 +49,11 @@ namespace JogoDaVelha
         }
 
 
-        // # Variável publica para verificar a matriz na horizontal
+
+        // # Método que verifica se a vitória foi horizontal, com as variáveis linhaHorizontalX e linhaHorizontalO que retornam um boolean caso a linha na matriz tenha X X X ou O O O
+
         public static bool linhaHorizontalX;
         public static bool linhaHorizontalO;
-
-        // # Método que verifica se a vitória foi horizontal
         public static void VerificaVitoriaHorizontal()
         {
             // Percorro a matriz e verifico se as linhas estão X X X  ou  O O O, e vai retornar um booleano true ou false
@@ -114,14 +112,77 @@ namespace JogoDaVelha
         }
 
 
-        // # Variáveis que vão guardar a escolha do jogador caso seja X ou O
-        public static string escolhaJogador1;
-        public static string escolhaJogador2;
+        /* 
+            # Método que verifica se a vitória foi vertical, com as variáveis linhaVerticalX e linhaVerticalO
+            que retornam um boolean caso a linha na matriz tenha:
+            X O
+            X O
+            X O
+        */
+
+        public static bool linhaVerticalX;
+        public static bool linhaVerticalO;
+        public static void VerificaVitoriaVertical()
+        {
+            for (int linhas = 0; linhas < 3; linhas++)
+            {
+                for (int colunas = 0; colunas < 3; colunas++)
+                {
+                    // Coluna vertical verificando X
+
+                    linhaVerticalX =
+                    (
+                        tabuleiro[0, 0] == "X" &&
+                        tabuleiro[1, 0] == "X" &&
+                        tabuleiro[2, 0] == "X"
+                    )
+                    ||
+                    (
+                        tabuleiro[0, 1] == "X" &&
+                        tabuleiro[1, 1] == "X" &&
+                        tabuleiro[2, 1] == "X"
+                     )
+                     ||
+                     (
+                        tabuleiro[0, 2] == "X" &&
+                        tabuleiro[1, 2] == "X" &&
+                        tabuleiro[2, 2] == "X"
+                     );
+
+                    // Coluna vertical verificando O
+                    linhaVerticalO =
+                    (
+                        tabuleiro[0, 0] == "O" &&
+                        tabuleiro[1, 0] == "O" &&
+                        tabuleiro[2, 0] == "O"
+                    )
+                    ||
+                    (
+                        tabuleiro[0, 1] == "O" &&
+                        tabuleiro[1, 1] == "O" &&
+                        tabuleiro[2, 1] == "O"
+                     )
+                     ||
+                     (
+                        tabuleiro[0, 2] == "O" &&
+                        tabuleiro[1, 2] == "O" &&
+                        tabuleiro[2, 2] == "O"
+                     );
+
+                }
+            }
+        }
 
 
-        // # Método que inicia jogo
+
+
+        // # Método que inicia o jogo
         public static void IniciarJogo()
         {
+            // # Variáveis que vão guardar a escolha do jogador caso seja X ou O
+            string escolhaJogador1;
+            string escolhaJogador2;
+
             while (true)
             {
                 // # Dar opção pro usuário qual valor da matriz ele quer prencher :
@@ -134,7 +195,6 @@ namespace JogoDaVelha
 
 
                 //- Aqui eu vou percorrer a matriz, e comparar e ver se é igual a escolha do jogador se for, eu vou substituir o número pela letra
-                
                 for (int linhas = 0; linhas < 3; linhas++)
                 {
                     for (int colunas = 0; colunas < 3; colunas++)
@@ -155,7 +215,6 @@ namespace JogoDaVelha
 
                 // # Método que verifica se a vitória é horizontal
                 VerificaVitoriaHorizontal();
-
 
                 // # Mostra mensagem caso a vitória tenha sido horizontal tanto de X como de O
                 if (Program.jogador1.letraJogo == "X" && linhaHorizontalX)
@@ -178,8 +237,34 @@ namespace JogoDaVelha
                     Console.WriteLine($"\nJogador {Program.jogador2.nome} Venceu a partida :D");
                     break;
                 }
-            }
 
+
+                // # Método que verifica se a vitória é vertical
+                VerificaVitoriaVertical();
+
+                // # Mostra mensagem caso a vitória tenha sido vertical tanto de X como de O
+                if (Program.jogador1.letraJogo == "X" && linhaVerticalX)
+                {
+                    Console.WriteLine($"\nJogador {Program.jogador1.nome} Venceu a partida :D");
+                    break;
+                }
+                if (Program.jogador1.letraJogo == "O" && linhaVerticalO)
+                {
+                    Console.WriteLine($"\nJogador {Program.jogador1.nome} Venceu a partida :D");
+                    break;
+                }
+                if (Program.jogador2.letraJogo == "X" && linhaVerticalX)
+                {
+                    Console.WriteLine($"\nJogador {Program.jogador2.nome} Venceu a partida :D");
+                    break;
+                }
+                if (Program.jogador2.letraJogo == "O" && linhaVerticalO)
+                {
+                    Console.WriteLine($"\nJogador {Program.jogador2.nome} Venceu a partida :D");
+                    break;
+                }
+
+            }
 
         }
 

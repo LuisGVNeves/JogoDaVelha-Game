@@ -9,7 +9,7 @@ namespace JogoDaVelha
         public static Jogador jogador2 = new Jogador("", "", 0);
 
 
-        // # Método mostrar Menu
+        // # Método Mostrar a interface inicial do jogo
         public static void MostrarInterfaceJogo()
         {
 
@@ -43,7 +43,7 @@ namespace JogoDaVelha
 
         }
 
-        // # Iniciar Menu do Game
+        // # Método Iniciar Menu do Game
         public static void IniciarMenuJogo()
         {
             Console.Write("\nDigite o nome do 1 jogador: ");
@@ -75,20 +75,13 @@ namespace JogoDaVelha
             // # Chamar a Função de chamar o tabuleiro para jogar
             Tabuleiro.MostrarTabuleiro();
 
-
             // # Iniciar o jogo
             Tabuleiro.IniciarJogo();
-
-
         }
-
 
         public static void Main(string[] args)
         {
             MostrarInterfaceJogo();
         }
-
-
-
     }
 }

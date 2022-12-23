@@ -55,7 +55,6 @@ namespace JogoDaVelha
         public static bool linhaHorizontalX;
         public static bool linhaHorizontalO;
 
-
         // # Método que verifica se a vitória foi horizontal
         public static void VerificaVitoriaHorizontal()
         {
@@ -114,6 +113,12 @@ namespace JogoDaVelha
             }
         }
 
+
+        // # Variáveis que vão guardar a escolha do jogador caso seja X ou O
+        public static string escolhaJogador1;
+        public static string escolhaJogador2;
+
+
         // # Método que inicia jogo
         public static void IniciarJogo()
         {
@@ -121,59 +126,56 @@ namespace JogoDaVelha
             {
                 // # Dar opção pro usuário qual valor da matriz ele quer prencher :
 
-                Console.Write($"\nJogador 1 {Menu.jogador1.nome} - Escolha o valor do tabuleiro que você quer preencher {Menu.jogador1.letraJogo}: ");
-                string escolhaJogador1 = Console.ReadLine();
+                Console.Write($"\nJogador 1 {Program.jogador1.nome} - Escolha o valor do tabuleiro que você quer preencher {Program.jogador1.letraJogo}: ");
+                escolhaJogador1 = Console.ReadLine();
 
-                Console.Write($"\nJogador 2 {Menu.jogador2.nome} - Escolha o valor do tabuleiro que você quer preencher com {Menu.jogador2.letraJogo}: ");
-                string escolhaJogador2 = Console.ReadLine();
+                Console.Write($"\nJogador 2 {Program.jogador2.nome} - Escolha o valor do tabuleiro que você quer preencher com {Program.jogador2.letraJogo}: ");
+                escolhaJogador2 = Console.ReadLine();
 
-                /*
-                    - Aqui eu vou percorrer a matriz, e comparar e ver se é igual a escolha do jogador
-                    se for, eu vou substituir o número pela letra
-                */
+
+                //- Aqui eu vou percorrer a matriz, e comparar e ver se é igual a escolha do jogador se for, eu vou substituir o número pela letra
+                
                 for (int linhas = 0; linhas < 3; linhas++)
                 {
                     for (int colunas = 0; colunas < 3; colunas++)
                     {
                         if (tabuleiro[linhas,colunas] == escolhaJogador1)
                         {
-                            tabuleiro[linhas, colunas] = Menu.jogador1.letraJogo;
+                            tabuleiro[linhas, colunas] = Program.jogador1.letraJogo;
                         }
                         if (tabuleiro[linhas, colunas] == escolhaJogador2)
                         {
-                            tabuleiro[linhas, colunas] = Menu.jogador2.letraJogo;
+                            tabuleiro[linhas, colunas] = Program.jogador2.letraJogo;
                         }
                     }
                 }
 
-
                 // # Quando matriz for trocada de número por X ou O, invoco a função mostra o tabuleiro para mostrar como está o jogo atual
                 MostrarTabuleiro();
-
 
                 // # Método que verifica se a vitória é horizontal
                 VerificaVitoriaHorizontal();
 
 
                 // # Mostra mensagem caso a vitória tenha sido horizontal tanto de X como de O
-                if (Menu.jogador1.letraJogo == "X" && linhaHorizontalX)
+                if (Program.jogador1.letraJogo == "X" && linhaHorizontalX)
                 {
-                    Console.WriteLine($"\nJogador {Menu.jogador1.nome} Venceu a partida :D");
+                    Console.WriteLine($"\nJogador {Program.jogador1.nome} Venceu a partida :D");
                     break;
                 }
-                if (Menu.jogador1.letraJogo == "O" && linhaHorizontalO)
+                if (Program.jogador1.letraJogo == "O" && linhaHorizontalO)
                 {
-                    Console.WriteLine($"\nJogador {Menu.jogador1.nome} Venceu a partida :D");
+                    Console.WriteLine($"\nJogador {Program.jogador1.nome} Venceu a partida :D");
                     break;
                 }
-                if (Menu.jogador2.letraJogo == "X" && linhaHorizontalX)
+                if (Program.jogador2.letraJogo == "X" && linhaHorizontalX)
                 {
-                    Console.WriteLine($"\nJogador {Menu.jogador2.nome} Venceu a partida :D");
+                    Console.WriteLine($"\nJogador {Program.jogador2.nome} Venceu a partida :D");
                     break;
                 }
-                if (Menu.jogador2.letraJogo == "O" && linhaHorizontalO)
+                if (Program.jogador2.letraJogo == "O" && linhaHorizontalO)
                 {
-                    Console.WriteLine($"\nJogador {Menu.jogador2.nome} Venceu a partida :D");
+                    Console.WriteLine($"\nJogador {Program.jogador2.nome} Venceu a partida :D");
                     break;
                 }
             }

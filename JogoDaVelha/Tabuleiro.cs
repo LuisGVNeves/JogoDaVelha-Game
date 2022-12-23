@@ -48,6 +48,33 @@ namespace JogoDaVelha
             Console.ResetColor();
         }
 
+        // # Método para perguntar ao usuário se ele deseja X ou O para preencher na matriz e trocar os números da matriz pela escolha do jogar X ou O
+        public static void EscolhaJogador()
+        {
+            Console.Write($"\nJogador {Program.jogador1.nome} - Escolha o valor do tabuleiro que você quer preencher {Program.jogador1.letraJogo}: ");
+            string escolhaJogador1 = Console.ReadLine();
+
+            Console.Write($"\nJogador {Program.jogador2.nome} - Escolha o valor do tabuleiro que você quer preencher com {Program.jogador2.letraJogo}: ");
+            string escolhaJogador2 = Console.ReadLine();
+
+
+            //- Aqui eu vou percorrer a matriz, e comparar e ver se é igual a escolha do jogador se for, eu vou substituir o número pela letra
+            for (int linhas = 0; linhas < 3; linhas++)
+            {
+                for (int colunas = 0; colunas < 3; colunas++)
+                {
+                    if (tabuleiro[linhas, colunas] == escolhaJogador1)
+                    {
+                        tabuleiro[linhas, colunas] = Program.jogador1.letraJogo;
+                    }
+                    if (tabuleiro[linhas, colunas] == escolhaJogador2)
+                    {
+                        tabuleiro[linhas, colunas] = Program.jogador2.letraJogo;
+                    }
+                }
+            }
+        }
+
 
 
         // # Método que verifica se a vitória foi horizontal, com as variáveis linhaHorizontalX e linhaHorizontalO que retornam um boolean caso a linha na matriz tenha X X X ou O O O
@@ -179,36 +206,9 @@ namespace JogoDaVelha
         // # Método que inicia o jogo
         public static void IniciarJogo()
         {
-            // # Variáveis que vão guardar a escolha do jogador caso seja X ou O
-            string escolhaJogador1;
-            string escolhaJogador2;
-
             while (true)
             {
-                // # Dar opção pro usuário qual valor da matriz ele quer prencher :
-
-                Console.Write($"\nJogador 1 {Program.jogador1.nome} - Escolha o valor do tabuleiro que você quer preencher {Program.jogador1.letraJogo}: ");
-                escolhaJogador1 = Console.ReadLine();
-
-                Console.Write($"\nJogador 2 {Program.jogador2.nome} - Escolha o valor do tabuleiro que você quer preencher com {Program.jogador2.letraJogo}: ");
-                escolhaJogador2 = Console.ReadLine();
-
-
-                //- Aqui eu vou percorrer a matriz, e comparar e ver se é igual a escolha do jogador se for, eu vou substituir o número pela letra
-                for (int linhas = 0; linhas < 3; linhas++)
-                {
-                    for (int colunas = 0; colunas < 3; colunas++)
-                    {
-                        if (tabuleiro[linhas,colunas] == escolhaJogador1)
-                        {
-                            tabuleiro[linhas, colunas] = Program.jogador1.letraJogo;
-                        }
-                        if (tabuleiro[linhas, colunas] == escolhaJogador2)
-                        {
-                            tabuleiro[linhas, colunas] = Program.jogador2.letraJogo;
-                        }
-                    }
-                }
+                EscolhaJogador();
 
                 // # Quando matriz for trocada de número por X ou O, invoco a função mostra o tabuleiro para mostrar como está o jogo atual
                 MostrarTabuleiro();

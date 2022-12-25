@@ -257,6 +257,91 @@ namespace JogoDaVelha
 
         }
 
+        // # Método para verificar matriz na diagonal e ver se teve X X X ou O O O  na diagonal
+        public static void VerificaVitoriaDiagonal()
+        {
+            bool linhaDiagonalX = true;
+            bool linhaDiagonalO = true;
+
+            for (int linhas = 0; linhas < 3; linhas++)
+            {
+                for (int colunas = 0; colunas < 3; colunas++)
+                {
+                    // Coluna diagonal verificando X
+
+                    linhaDiagonalX =
+                    (
+                        tabuleiro[0, 0] == "X" &&
+                        tabuleiro[1, 1] == "X" &&
+                        tabuleiro[2, 2] == "X"
+                    )
+                    ||
+                    (
+                        tabuleiro[0, 2] == "X" &&
+                        tabuleiro[1, 1] == "X" &&
+                        tabuleiro[2, 2] == "X"
+                     )
+                     ||
+                     (
+                        tabuleiro[2, 0] == "X" &&
+                        tabuleiro[1, 1] == "X" &&
+                        tabuleiro[0, 2] == "X"
+                     );
+
+                    // Coluna vertical verificando O
+                    linhaDiagonalO =
+                    (
+                        tabuleiro[0, 0] == "O" &&
+                        tabuleiro[1, 1] == "O" &&
+                        tabuleiro[2, 2] == "O"
+                    )
+                    ||
+                    (
+                        tabuleiro[0, 2] == "O" &&
+                        tabuleiro[1, 1] == "O" &&
+                        tabuleiro[2, 2] == "O"
+                     )
+                    ||
+                     (
+                        tabuleiro[2, 0] == "O" &&
+                        tabuleiro[1, 1] == "O" &&
+                        tabuleiro[0, 2] == "O"
+                     );
+
+                }
+            }
+
+            // # Mostra mensagem caso a vitória tenha sido vertical tanto de X como de O
+            if (Program.jogador1.letraJogo == "X" && linhaDiagonalX)
+            {
+                Console.WriteLine($"\nJogador {Program.jogador1.nome} Venceu a partida :D");
+
+                Console.WriteLine("Deseja jogar de novo SIM ou NÃO: ");
+                jogarDeNovo = Console.ReadLine().ToUpper();
+            }
+            if (Program.jogador1.letraJogo == "O" && linhaDiagonalO)
+            {
+                Console.WriteLine($"\nJogador {Program.jogador1.nome} Venceu a partida :D");
+
+                Console.WriteLine("Deseja jogar de novo SIM ou NÃO: ");
+                jogarDeNovo = Console.ReadLine().ToUpper();
+            }
+            if (Program.jogador2.letraJogo == "X" && linhaDiagonalX)
+            {
+                Console.WriteLine($"\nJogador {Program.jogador2.nome} Venceu a partida :D");
+
+                Console.WriteLine("Deseja jogar de novo SIM ou NÃO: ");
+                jogarDeNovo = Console.ReadLine().ToUpper();
+            }
+            if (Program.jogador2.letraJogo == "O" && linhaDiagonalO)
+            {
+                Console.WriteLine($"\nJogador {Program.jogador2.nome} Venceu a partida :D");
+
+                Console.WriteLine("Deseja jogar de novo SIM ou NÃO: ");
+                jogarDeNovo = Console.ReadLine().ToUpper();
+            }
+
+        }
 
 
 
@@ -276,7 +361,10 @@ namespace JogoDaVelha
                 // # Método que verifica se a vitória é vertical
                 VerificaVitoriaVertical();
 
-                if(jogarDeNovo == "NAO" || jogarDeNovo == "NÃO")
+                // # Método que verifica se a vitória é diagonal
+                VerificaVitoriaDiagonal();
+
+                if (jogarDeNovo == "NAO" || jogarDeNovo == "NÃO")
                 {
                     break;
                 }

@@ -8,7 +8,6 @@ namespace JogoDaVelha
         public static Jogador jogador1 = new Jogador("", "", 0);
         public static Jogador jogador2 = new Jogador("", "", 0);
 
-
         // # Método Mostrar a interface inicial do jogo
         public static void MostrarInterfaceJogo()
         {

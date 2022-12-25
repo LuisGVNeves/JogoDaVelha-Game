@@ -13,6 +13,7 @@ namespace JogoDaVelha
         public static string[,] tabuleiro = new string[3, 3];
 
 
+
         // # Método que preenche tabuleiro com números, para o usuário preencher com X ou O
         public static void PreencherTabuleiro()
         {
@@ -40,6 +41,7 @@ namespace JogoDaVelha
         }
 
 
+
         // # Método Mostrar Tabuleiro
         public static void MostrarTabuleiro()
         {
@@ -49,6 +51,7 @@ namespace JogoDaVelha
             Console.WriteLine($" {tabuleiro[2,0]}  | {tabuleiro[2,1]} |  {tabuleiro[2,2]}\n");
             Console.ResetColor();
         }
+
 
 
         // # Método para perguntar ao usuário se ele deseja X ou O para preencher na matriz e trocar os números da matriz pela escolha do jogar X ou O
@@ -79,11 +82,25 @@ namespace JogoDaVelha
         }
 
 
-        // # Variável para parar o looping infinito no método iniciarJogo e começar uma nova partida
-        public static string jogarDeNovo;
+        // # Método para perguntar ao usuário se ele deseja jogar de novo
+        public static void JogarDeNovo(string jogarDeNovo)
+        {
+            Console.Write("Deseja jogar de novo SIM ou NÃO: ");
+            jogarDeNovo = Console.ReadLine().ToUpper();
 
+            if (jogarDeNovo == "SIM")
+            {
+                Program.IniciarJogo();
+            }
+            else
+            {
+                System.Environment.Exit(0);
+            }
+        }
+        
+        
         // # Método para verificar matriz na horizontal e ver se teve X X X ou O O O  na horizontal
-        public static void VerificaVitoriaHorizontal()
+        public static void VerificaVitoriaHorizontal(string jogarDeNovo)
         {
             bool linhaHorizontalX = true;
             bool linhaHorizontalO = true;
@@ -144,35 +161,42 @@ namespace JogoDaVelha
             {
                 Console.WriteLine($"\nJogador {Program.jogador1.nome} Venceu a partida :D");
 
-                Console.WriteLine("Deseja jogar de novo SIM ou NÃO: ");
-                jogarDeNovo = Console.ReadLine().ToUpper();
+                MostrarTabuleiro();
+                PreencherTabuleiro();
+                JogarDeNovo(jogarDeNovo);
             }
             if (Program.jogador1.letraJogo == "O" && linhaHorizontalO)
             {
                 Console.WriteLine($"\nJogador {Program.jogador1.nome} Venceu a partida :D");
 
-                Console.WriteLine("Deseja jogar de novo SIM ou NÃO: ");
-                jogarDeNovo = Console.ReadLine().ToUpper();
+                MostrarTabuleiro();
+                PreencherTabuleiro();
+                JogarDeNovo(jogarDeNovo);
             }
             if (Program.jogador2.letraJogo == "X" && linhaHorizontalX)
             {
                 Console.WriteLine($"\nJogador {Program.jogador2.nome} Venceu a partida :D");
 
-                Console.WriteLine("Deseja jogar de novo SIM ou NÃO: ");
-                jogarDeNovo = Console.ReadLine().ToUpper();
+                MostrarTabuleiro();
+                PreencherTabuleiro();
+                JogarDeNovo(jogarDeNovo);
             }
             if (Program.jogador2.letraJogo == "O" && linhaHorizontalO)
             {
                 Console.WriteLine($"\nJogador {Program.jogador2.nome} Venceu a partida :D");
               
-                Console.WriteLine("Deseja jogar de novo SIM ou NÃO: ");
-                jogarDeNovo = Console.ReadLine().ToUpper();
+                MostrarTabuleiro();
+                PreencherTabuleiro();
+                JogarDeNovo(jogarDeNovo);
+       
             }
 
         }
 
+
+
         // # Método para verificar matriz na vertical e ver se teve X X X ou O O O  na vertical
-        public static void VerificaVitoriaVertical()
+        public static void VerificaVitoriaVertical(string jogarDeNovo)
         {
             bool linhaVerticalX = true;
             bool linhaVerticalO = true;
@@ -229,36 +253,38 @@ namespace JogoDaVelha
             if (Program.jogador1.letraJogo == "X" && linhaVerticalX)
             {
                 Console.WriteLine($"\nJogador {Program.jogador1.nome} Venceu a partida :D");
-
-                Console.WriteLine("Deseja jogar de novo SIM ou NÃO: ");
-                jogarDeNovo = Console.ReadLine().ToUpper();
+                MostrarTabuleiro();
+                PreencherTabuleiro();
+                JogarDeNovo(jogarDeNovo);
             }
             if (Program.jogador1.letraJogo == "O" && linhaVerticalO)
             {
                 Console.WriteLine($"\nJogador {Program.jogador1.nome} Venceu a partida :D");
-
-                Console.WriteLine("Deseja jogar de novo SIM ou NÃO: ");
-                jogarDeNovo = Console.ReadLine().ToUpper();
+                MostrarTabuleiro();
+                PreencherTabuleiro();
+                JogarDeNovo(jogarDeNovo);
             }
             if (Program.jogador2.letraJogo == "X" && linhaVerticalX)
             {
                 Console.WriteLine($"\nJogador {Program.jogador2.nome} Venceu a partida :D");
-
-                Console.WriteLine("Deseja jogar de novo SIM ou NÃO: ");
-                jogarDeNovo = Console.ReadLine().ToUpper();
+                MostrarTabuleiro();
+                PreencherTabuleiro();
+                JogarDeNovo(jogarDeNovo);
             }
             if (Program.jogador2.letraJogo == "O" && linhaVerticalO)
             {
                 Console.WriteLine($"\nJogador {Program.jogador2.nome} Venceu a partida :D");
-
-                Console.WriteLine("Deseja jogar de novo SIM ou NÃO: ");
-                jogarDeNovo = Console.ReadLine().ToUpper();
+                MostrarTabuleiro();
+                PreencherTabuleiro();
+                JogarDeNovo(jogarDeNovo);
             }
 
         }
 
+
+
         // # Método para verificar matriz na diagonal e ver se teve X X X ou O O O  na diagonal
-        public static void VerificaVitoriaDiagonal()
+        public static void VerificaVitoriaDiagonal(string jogarDeNovo)
         {
             bool linhaDiagonalX = true;
             bool linhaDiagonalO = true;
@@ -315,63 +341,34 @@ namespace JogoDaVelha
             if (Program.jogador1.letraJogo == "X" && linhaDiagonalX)
             {
                 Console.WriteLine($"\nJogador {Program.jogador1.nome} Venceu a partida :D");
-
-                Console.WriteLine("Deseja jogar de novo SIM ou NÃO: ");
-                jogarDeNovo = Console.ReadLine().ToUpper();
+                MostrarTabuleiro();
+                PreencherTabuleiro();
+                JogarDeNovo(jogarDeNovo);
             }
             if (Program.jogador1.letraJogo == "O" && linhaDiagonalO)
             {
                 Console.WriteLine($"\nJogador {Program.jogador1.nome} Venceu a partida :D");
-
-                Console.WriteLine("Deseja jogar de novo SIM ou NÃO: ");
-                jogarDeNovo = Console.ReadLine().ToUpper();
+                MostrarTabuleiro();
+                PreencherTabuleiro();
+                JogarDeNovo(jogarDeNovo);
             }
             if (Program.jogador2.letraJogo == "X" && linhaDiagonalX)
             {
                 Console.WriteLine($"\nJogador {Program.jogador2.nome} Venceu a partida :D");
-
-                Console.WriteLine("Deseja jogar de novo SIM ou NÃO: ");
-                jogarDeNovo = Console.ReadLine().ToUpper();
+                MostrarTabuleiro();
+                PreencherTabuleiro();
+                JogarDeNovo(jogarDeNovo);
             }
             if (Program.jogador2.letraJogo == "O" && linhaDiagonalO)
             {
                 Console.WriteLine($"\nJogador {Program.jogador2.nome} Venceu a partida :D");
-
-                Console.WriteLine("Deseja jogar de novo SIM ou NÃO: ");
-                jogarDeNovo = Console.ReadLine().ToUpper();
-            }
-
-        }
-
-
-
-        // # Método que inicia o jogo
-        public static void IniciarJogo()
-        {
-            while (true)
-            {
-                EscolhaJogador();
-
-                // # Quando matriz for trocada de número por X ou O, invoco a função mostra o tabuleiro para mostrar como está o jogo atual
                 MostrarTabuleiro();
-
-                // # Método que verifica se a vitória é horizontal
-                VerificaVitoriaHorizontal();
-
-                // # Método que verifica se a vitória é vertical
-                VerificaVitoriaVertical();
-
-                // # Método que verifica se a vitória é diagonal
-                VerificaVitoriaDiagonal();
-
-                if (jogarDeNovo == "NAO" || jogarDeNovo == "NÃO")
-                {
-                    break;
-                }
+                PreencherTabuleiro();
+                JogarDeNovo(jogarDeNovo);
             }
 
-
         }
+
 
     }
 }

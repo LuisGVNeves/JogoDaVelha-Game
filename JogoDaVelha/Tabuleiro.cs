@@ -46,7 +46,7 @@ namespace JogoDaVelha
         public static void MostrarTabuleiro()
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine($" {tabuleiro[0,0]}  | {tabuleiro[0,1]} |  {tabuleiro[0,2]}");
+            Console.WriteLine($"\n {tabuleiro[0,0]}  | {tabuleiro[0,1]} |  {tabuleiro[0,2]}");
             Console.WriteLine($" {tabuleiro[1,0]}  | {tabuleiro[1,1]} |  {tabuleiro[1,2]}");
             Console.WriteLine($" {tabuleiro[2,0]}  | {tabuleiro[2,1]} |  {tabuleiro[2,2]}\n");
             Console.ResetColor();
@@ -368,6 +368,57 @@ namespace JogoDaVelha
             }
 
         }
+
+
+
+
+
+
+        // # Método para verificar matriz na horizontal e ver se teve X X X ou O O O  na horizontal
+        public static void VerificaEmpate(string jogarDeNovo)
+        {
+            bool[] linhasHorizontaisX = {true,true,true,true };
+            bool[] linhasHorizontaisO = {true, true, true, true };
+
+
+            // Percorro a matriz e verifico se as linhas estão X X X  ou  O O O, e vai retornar um booleano true ou false
+            for (int linhas = 0; linhas < 3; linhas++)
+            {
+                for (int colunas = 0; colunas < 3; colunas++)
+                {
+                    // Linhas horizontais da coluna
+                    linhasHorizontaisX[0] = (tabuleiro[0, 0] == "X" && tabuleiro[0, 1] == "X" && tabuleiro[0, 2] == "X");
+                    linhasHorizontaisX[1] = (tabuleiro[1, 0] == "X" && tabuleiro[1, 1] == "X" && tabuleiro[1, 2] == "X");
+                    linhasHorizontaisX[2] = (tabuleiro[2, 0] == "X" && tabuleiro[2, 1] == "X" && tabuleiro[2, 2] == "X");
+
+                    linhasHorizontaisO[0] = (tabuleiro[0, 0] == "O" && tabuleiro[0, 1] == "O" && tabuleiro[0, 2] == "O");
+                    linhasHorizontaisO[1] = (tabuleiro[1, 0] == "O" && tabuleiro[1, 1] == "O" && tabuleiro[1, 2] == "O");
+                    linhasHorizontaisO[2] = (tabuleiro[2, 0] == "O" && tabuleiro[2, 1] == "O" && tabuleiro[2, 2] == "O");
+                }
+            }
+
+            // # Mostra mensagem caso a vitória tenha sido horizontal tanto de X como de O
+            if (
+                (linhasHorizontaisX[0] == true) && (linhasHorizontaisO[1] == true) || (linhasHorizontaisO[2] == true) ||
+                (linhasHorizontaisX[1] == true) && (linhasHorizontaisO[0] == true) || (linhasHorizontaisO[2] == true) ||
+                (linhasHorizontaisX[2] == true) && (linhasHorizontaisO[0] == true) || (linhasHorizontaisO[1] == true)
+                )
+            {
+                Console.WriteLine("\nEMPATE !");
+
+                MostrarTabuleiro();
+                PreencherTabuleiro();
+                JogarDeNovo(jogarDeNovo);
+            }
+
+            // Pegar as linhas e colunas e diagonais da matriz e jogar em booleanos igual eu fiz aqui na condição de  cima onde eu pego a linha da matriz e coloco numa variavel booleana primeiraLinhaHorizontalX, então eu faço isso pra colunas e diagonais, depois que eu terminar, eu faço um if else do tipo
+            // if(!linhas e matriz e diagonais) empate
+
+
+
+
+        }
+
 
 
     }

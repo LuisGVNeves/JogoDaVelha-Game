@@ -42,7 +42,7 @@ namespace JogoDaVelha
                     }
 
                     Console.WriteLine($"\nJogador {jogador1.nome} começa com: {jogador1.letraJogo}");
-                    Console.WriteLine($"\nJogador {jogador2.nome} começa com: {jogador2.letraJogo}\n\n");
+                    Console.WriteLine($"\nJogador {jogador2.nome} começa com: {jogador2.letraJogo}\n");
                     IniciarJogo();
                     break;
                 }
@@ -62,6 +62,7 @@ namespace JogoDaVelha
         public static string jogarDeNovo;
 
 
+
         // # Método que inicia o jogo
         public static void IniciarJogo()
         {
@@ -75,6 +76,9 @@ namespace JogoDaVelha
 
                 // Método para perguntar ao usuário se ele deseja X ou O para preencher na matriz e trocar os números da matriz pela escolha do jogar X ou O
                 EscolhaJogador();
+
+
+                VerificaEmpate(jogarDeNovo);
 
                 // # Método que verifica se a vitória é horizontal e pergunta se deseja jogar de novo
                 VerificaVitoriaHorizontal(jogarDeNovo);

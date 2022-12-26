@@ -82,7 +82,7 @@ namespace JogoDaVelha
                 MostrarTabuleiro();
 
                 // Método para perguntar ao usuário se ele deseja X ou O para preencher na matriz e trocar os números da matriz pela escolha do jogar X ou O
-                EscolhaJogador();
+                EscolhaJogador(jogarDeNovo);
 
                 // # Método que verifica o empate do jogo atual
                 VerificaEmpate(jogarDeNovo);
@@ -97,6 +97,8 @@ namespace JogoDaVelha
                 VerificaVitoriaDiagonal(jogarDeNovo);
 
             } while (jogarDeNovo != "NAO" && jogarDeNovo != "NÃO");
+
+
 
         }
 

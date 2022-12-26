@@ -52,20 +52,46 @@ namespace JogoDaVelha
 
 
         // # Método para perguntar ao usuário se ele deseja X ou O para preencher na matriz e trocar os números da matriz pela escolha do jogar X ou O
-        public static void EscolhaJogador()
+        public static void EscolhaJogador(string jogarDeNovo)
         {
+            string escolhaJogador1;
+            string escolhaJogador2;
+
             Console.Write($"\nJogador {Program.jogador1.nome} - Escolha o valor do tabuleiro que você quer preencher {Program.jogador1.letraJogo}: ");
-            string escolhaJogador1 = Console.ReadLine();
+            escolhaJogador1 = Console.ReadLine();
 
             Console.Write($"\nJogador {Program.jogador2.nome} - Escolha o valor do tabuleiro que você quer preencher com {Program.jogador2.letraJogo}: ");
-            string escolhaJogador2 = Console.ReadLine();
+            escolhaJogador2 = Console.ReadLine();
 
+            /*
+             - Aqui eu vou percorrer a matriz, e comparar e ver se é igual a escolha do jogador se for, eu vou substituir o número do intervalo [1-9] pela letra
 
-            //- Aqui eu vou percorrer a matriz, e comparar e ver se é igual a escolha do jogador se for, eu vou substituir o número pela letra
+             - Se o intervalo[1-9] estiver preenchido com numeros o código ocorre normalmente, porém, se não estiver, quer dizer que ele já está lotado de X e O, e se até o número 8 nenhuma função de checar vitoria, chegar empate entrar, então quer dizer que deu velha
+            */
             for (int linhas = 0; linhas < 3; linhas++)
             {
                 for (int colunas = 0; colunas < 3; colunas++)
                 {
+
+                    if ((tabuleiro[0, 0] == "1") || (tabuleiro[0, 0] == "1") ||
+                       (tabuleiro[0, 1] == "2") || (tabuleiro[0, 1] == "2") ||
+                       (tabuleiro[0, 2] == "3") || (tabuleiro[0, 2] == "3") ||
+                       (tabuleiro[1, 0] == "4") || (tabuleiro[1, 0] == "4") ||
+                       (tabuleiro[1, 1] == "5") || (tabuleiro[1, 1] == "5") ||
+                       (tabuleiro[1, 2] == "6") || (tabuleiro[1, 2] == "6") ||
+                       (tabuleiro[2, 0] == "7") || (tabuleiro[2, 0] == "7") ||
+                       (tabuleiro[2, 1] == "8") || (tabuleiro[2, 1] == "8"))
+                    {
+
+                    }
+                    else
+                    {
+                        MostrarTabuleiro();
+                        Console.WriteLine("Deu velha");
+                        JogarDeNovo(jogarDeNovo);
+                    }
+
+
                     if (tabuleiro[linhas, colunas] == escolhaJogador1)
                     {
                         tabuleiro[linhas, colunas] = Program.jogador1.letraJogo;
@@ -74,8 +100,11 @@ namespace JogoDaVelha
                     {
                         tabuleiro[linhas, colunas] = Program.jogador2.letraJogo;
                     }
+
                 }
             }
+
+
         }
 
 

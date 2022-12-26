@@ -47,11 +47,12 @@ namespace JogoDaVelha
             Console.WriteLine($"\n {tabuleiro[0,0]}  | {tabuleiro[0,1]} |  {tabuleiro[0,2]}");
             Console.WriteLine($" {tabuleiro[1,0]}  | {tabuleiro[1,1]} |  {tabuleiro[1,2]}");
             Console.WriteLine($" {tabuleiro[2,0]}  | {tabuleiro[2,1]} |  {tabuleiro[2,2]}\n");
+            
             Console.ResetColor();
         }
 
 
-        // # Método para perguntar ao usuário se ele deseja X ou O para preencher na matriz e trocar os números da matriz pela escolha do jogar X ou O
+        // # Método para perguntar ao usuário se ele deseja X ou O para preencher na matriz e trocar os números da matriz pela escolha do jogador X ou O
         public static void EscolhaJogador(string jogarDeNovo)
         {
             string escolhaJogador1;
@@ -64,9 +65,9 @@ namespace JogoDaVelha
             escolhaJogador2 = Console.ReadLine();
 
             /*
+             - Se o intervalo[1-9] estiver preenchido com numeros o código ocorre normalmente, porém, se não estiver, quer dizer que ele já está lotado de X e O, e se até o número 8 nenhuma função de checar vitoria, chegar empate entrar, então quer dizer que deu velha
              - Aqui eu vou percorrer a matriz, e comparar e ver se é igual a escolha do jogador se for, eu vou substituir o número do intervalo [1-9] pela letra
 
-             - Se o intervalo[1-9] estiver preenchido com numeros o código ocorre normalmente, porém, se não estiver, quer dizer que ele já está lotado de X e O, e se até o número 8 nenhuma função de checar vitoria, chegar empate entrar, então quer dizer que deu velha
             */
             for (int linhas = 0; linhas < 3; linhas++)
             {
@@ -82,6 +83,33 @@ namespace JogoDaVelha
                        (tabuleiro[2, 0] == "7") || (tabuleiro[2, 0] == "7") ||
                        (tabuleiro[2, 1] == "8") || (tabuleiro[2, 1] == "8"))
                     {
+                        if(escolhaJogador1 == escolhaJogador2)
+                        {
+                            Console.Write("\nCampo já preenchido, por favor digite um campo que não foi usado: ");
+                            string novoCampo = Console.ReadLine();
+
+                            escolhaJogador1 = novoCampo;
+                            tabuleiro[linhas, colunas] = Program.jogador1.letraJogo;
+                        }
+                        else if(escolhaJogador2 == escolhaJogador1)
+                        {
+                            Console.Write("\nCampo já preenchido, por favor digite um campo que não foi usado: ");
+                            string novoCampo = Console.ReadLine();
+
+                            escolhaJogador2 = novoCampo;
+                            tabuleiro[linhas, colunas] = Program.jogador2.letraJogo;
+                        }
+                        else
+                        {
+                            if (tabuleiro[linhas, colunas] == escolhaJogador1)
+                            {
+                                tabuleiro[linhas, colunas] = Program.jogador1.letraJogo;
+                            }
+                            if (tabuleiro[linhas, colunas] == escolhaJogador2)
+                            {
+                                tabuleiro[linhas, colunas] = Program.jogador2.letraJogo;
+                            }
+                        }
 
                     }
                     else
@@ -91,15 +119,6 @@ namespace JogoDaVelha
                         JogarDeNovo(jogarDeNovo);
                     }
 
-
-                    if (tabuleiro[linhas, colunas] == escolhaJogador1)
-                    {
-                        tabuleiro[linhas, colunas] = Program.jogador1.letraJogo;
-                    }
-                    if (tabuleiro[linhas, colunas] == escolhaJogador2)
-                    {
-                        tabuleiro[linhas, colunas] = Program.jogador2.letraJogo;
-                    }
 
                 }
             }

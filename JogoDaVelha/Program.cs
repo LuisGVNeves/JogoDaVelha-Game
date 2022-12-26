@@ -12,6 +12,12 @@ namespace JogoDaVelha
         // # Método Mostrar a interface inicial do jogo
         public static void MostrarInterfaceJogo()
         {
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.BackgroundColor = ConsoleColor.Red;
+            Console.WriteLine("-----------------  BEM-VINDO AO JOGO DA VELHA  -----------------\n");
+            Console.ResetColor();
+
+
             // # Variável escolha do usuário
             string escolhaUsuario;
             do
@@ -43,6 +49,8 @@ namespace JogoDaVelha
 
                     Console.WriteLine($"\nJogador {jogador1.nome} começa com: {jogador1.letraJogo}");
                     Console.WriteLine($"\nJogador {jogador2.nome} começa com: {jogador2.letraJogo}\n");
+
+                    // # Inicia o game
                     IniciarJogo();
                     break;
                 }
@@ -62,7 +70,6 @@ namespace JogoDaVelha
         public static string jogarDeNovo;
 
 
-
         // # Método que inicia o jogo
         public static void IniciarJogo()
         {
@@ -77,7 +84,7 @@ namespace JogoDaVelha
                 // Método para perguntar ao usuário se ele deseja X ou O para preencher na matriz e trocar os números da matriz pela escolha do jogar X ou O
                 EscolhaJogador();
 
-
+                // # Método que verifica o empate do jogo atual
                 VerificaEmpate(jogarDeNovo);
 
                 // # Método que verifica se a vitória é horizontal e pergunta se deseja jogar de novo
@@ -96,13 +103,7 @@ namespace JogoDaVelha
 
         public static void Main(string[] args)
         {
-            Console.ForegroundColor = ConsoleColor.Black;
-            Console.BackgroundColor = ConsoleColor.Red;
-            Console.WriteLine("-----------------  BEM-VINDO AO JOGO DA VELHA  -----------------\n");
-            Console.ResetColor();
-
             MostrarInterfaceJogo();
-            
         }
 
 

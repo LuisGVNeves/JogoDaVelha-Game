@@ -13,7 +13,6 @@ namespace JogoDaVelha
         public static string[,] tabuleiro = new string[3, 3];
 
 
-
         // # Método que preenche tabuleiro com números, para o usuário preencher com X ou O
         public static void PreencherTabuleiro()
         {
@@ -41,7 +40,6 @@ namespace JogoDaVelha
         }
 
 
-
         // # Método Mostrar Tabuleiro
         public static void MostrarTabuleiro()
         {
@@ -51,7 +49,6 @@ namespace JogoDaVelha
             Console.WriteLine($" {tabuleiro[2,0]}  | {tabuleiro[2,1]} |  {tabuleiro[2,2]}\n");
             Console.ResetColor();
         }
-
 
 
         // # Método para perguntar ao usuário se ele deseja X ou O para preencher na matriz e trocar os números da matriz pela escolha do jogar X ou O
@@ -164,6 +161,7 @@ namespace JogoDaVelha
                 MostrarTabuleiro();
                 PreencherTabuleiro();
                 JogarDeNovo(jogarDeNovo);
+
             }
             if (Program.jogador1.letraJogo == "O" && linhaHorizontalO)
             {
@@ -188,7 +186,6 @@ namespace JogoDaVelha
                 MostrarTabuleiro();
                 PreencherTabuleiro();
                 JogarDeNovo(jogarDeNovo);
-       
             }
 
         }
@@ -371,22 +368,21 @@ namespace JogoDaVelha
 
 
 
-
-
-
         // # Método para verificar matriz na horizontal e ver se teve X X X ou O O O  na horizontal
         public static void VerificaEmpate(string jogarDeNovo)
         {
-            bool[] linhasHorizontaisX = {true,true,true,true };
-            bool[] linhasHorizontaisO = {true, true, true, true };
+            bool[] linhasHorizontaisX = { true, true, true, true };
+            bool[] linhasHorizontaisO = { true, true, true, true };
 
+            bool[] linhasVerticaisX = { true, true, true, true };
+            bool[] linhasVerticaisO = { true, true, true, true };
 
             // Percorro a matriz e verifico se as linhas estão X X X  ou  O O O, e vai retornar um booleano true ou false
             for (int linhas = 0; linhas < 3; linhas++)
             {
                 for (int colunas = 0; colunas < 3; colunas++)
                 {
-                    // Linhas horizontais da coluna
+                    // Linhas horizontais da matriz
                     linhasHorizontaisX[0] = (tabuleiro[0, 0] == "X" && tabuleiro[0, 1] == "X" && tabuleiro[0, 2] == "X");
                     linhasHorizontaisX[1] = (tabuleiro[1, 0] == "X" && tabuleiro[1, 1] == "X" && tabuleiro[1, 2] == "X");
                     linhasHorizontaisX[2] = (tabuleiro[2, 0] == "X" && tabuleiro[2, 1] == "X" && tabuleiro[2, 2] == "X");
@@ -394,15 +390,36 @@ namespace JogoDaVelha
                     linhasHorizontaisO[0] = (tabuleiro[0, 0] == "O" && tabuleiro[0, 1] == "O" && tabuleiro[0, 2] == "O");
                     linhasHorizontaisO[1] = (tabuleiro[1, 0] == "O" && tabuleiro[1, 1] == "O" && tabuleiro[1, 2] == "O");
                     linhasHorizontaisO[2] = (tabuleiro[2, 0] == "O" && tabuleiro[2, 1] == "O" && tabuleiro[2, 2] == "O");
+
+
+                    // Linhas verticais da matriz
+                    linhasVerticaisX[0] = (tabuleiro[0, 0] == "X" && tabuleiro[1, 0] == "X" && tabuleiro[2, 0] == "X");
+                    linhasVerticaisX[1] = (tabuleiro[0, 1] == "X" && tabuleiro[1, 1] == "X" && tabuleiro[2, 1] == "X");
+                    linhasVerticaisX[2] = (tabuleiro[0, 2] == "X" && tabuleiro[1, 2] == "X" && tabuleiro[2, 2] == "X");
+
+                    linhasVerticaisO[0] = (tabuleiro[0, 0] == "O" && tabuleiro[1, 0] == "O" && tabuleiro[2, 0] == "O");
+                    linhasVerticaisO[1] = (tabuleiro[0, 1] == "O" && tabuleiro[1, 1] == "O" && tabuleiro[2, 1] == "O");
+                    linhasVerticaisO[2] = (tabuleiro[0, 2] == "O" && tabuleiro[1, 2] == "O" && tabuleiro[2, 2] == "O");
+
                 }
             }
 
-            // # Mostra mensagem caso a vitória tenha sido horizontal tanto de X como de O
-            if (
-                (linhasHorizontaisX[0] == true) && (linhasHorizontaisO[1] == true) || (linhasHorizontaisO[2] == true) ||
+            #region # Region - mostra mensagem caso tenha sido empate na vertical ou na horizontal
+
+            if ((linhasHorizontaisX[0] == true) && (linhasHorizontaisO[1] == true) || (linhasHorizontaisO[2] == true) ||
                 (linhasHorizontaisX[1] == true) && (linhasHorizontaisO[0] == true) || (linhasHorizontaisO[2] == true) ||
-                (linhasHorizontaisX[2] == true) && (linhasHorizontaisO[0] == true) || (linhasHorizontaisO[1] == true)
-                )
+                (linhasHorizontaisX[2] == true) && (linhasHorizontaisO[0] == true) || (linhasHorizontaisO[1] == true))
+            {
+                Console.WriteLine("\nEMPATE !");
+
+                MostrarTabuleiro();
+                PreencherTabuleiro();
+                JogarDeNovo(jogarDeNovo);
+            }
+            else if (
+                (linhasVerticaisX[0] == true) && (linhasVerticaisO[1] == true) || (linhasVerticaisO[2] == true) ||
+                (linhasVerticaisX[1] == true) && (linhasVerticaisO[0] == true) || (linhasVerticaisO[2] == true) ||
+                (linhasVerticaisX[2] == true) && (linhasVerticaisO[0] == true) || (linhasVerticaisO[1] == true)) 
             {
                 Console.WriteLine("\nEMPATE !");
 
@@ -411,9 +428,9 @@ namespace JogoDaVelha
                 JogarDeNovo(jogarDeNovo);
             }
 
-            // Pegar as linhas e colunas e diagonais da matriz e jogar em booleanos igual eu fiz aqui na condição de  cima onde eu pego a linha da matriz e coloco numa variavel booleana primeiraLinhaHorizontalX, então eu faço isso pra colunas e diagonais, depois que eu terminar, eu faço um if else do tipo
-            // if(!linhas e matriz e diagonais) empate
 
+
+            #endregion
 
 
 

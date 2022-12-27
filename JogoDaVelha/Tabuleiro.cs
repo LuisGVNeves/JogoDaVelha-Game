@@ -47,10 +47,25 @@ namespace JogoDaVelha
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine($"\n {tabuleiro[0,0]}  | {tabuleiro[0,1]} |  {tabuleiro[0,2]}");
-            Console.WriteLine($" {tabuleiro[1,0]}  | {tabuleiro[1,1]} |  {tabuleiro[1,2]}");
-            Console.WriteLine($" {tabuleiro[2,0]}  | {tabuleiro[2,1]} |  {tabuleiro[2,2]}\n");
-            
+
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.WriteLine("------------");
             Console.ResetColor();
+
+            
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($" {tabuleiro[1,0]}  | {tabuleiro[1,1]} |  {tabuleiro[1,2]}");
+
+
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.Write("------------\n");
+            Console.ResetColor();
+
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($" {tabuleiro[2,0]}  | {tabuleiro[2,1]} |  {tabuleiro[2,2]}\n");
+            Console.ResetColor();
+
+
         }
 
         // # Método para saber qual valor do intervalo [0-9] o usuário vai querer substituir pelo X ou O
@@ -60,8 +75,29 @@ namespace JogoDaVelha
             Console.Write($"\nJogador {Program.jogador1.nome} - Escolha o valor do tabuleiro que você quer preencher {Program.jogador1.letraJogo}: ");
             escolhaJogador1 = Console.ReadLine();
 
+            // Verifica se numero que usuario quer é maior que o intervalo [0-9]
+            if(int.Parse(escolhaJogador1) < 0 || int.Parse(escolhaJogador1) > 9)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write("\n\nNúmero não pertence ao intervalo [0-9] digite um número novamente: ");
+                Console.ResetColor();
+
+                string novoNumero = Console.ReadLine();
+                escolhaJogador1 = novoNumero;
+            }
+
             Console.Write($"\nJogador {Program.jogador2.nome} - Escolha o valor do tabuleiro que você quer preencher com {Program.jogador2.letraJogo}: ");
             escolhaJogador2 = Console.ReadLine();
+
+            if (int.Parse(escolhaJogador2) < 0 || int.Parse(escolhaJogador2) > 9)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write("\n\nNúmero não pertence ao intervalo [0-9] digite um número novamente: ");
+                Console.ResetColor();
+
+                string novoNumero = Console.ReadLine();
+                escolhaJogador2 = novoNumero;
+            }
 
         }
 

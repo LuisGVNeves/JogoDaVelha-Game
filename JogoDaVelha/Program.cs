@@ -12,9 +12,9 @@ namespace JogoDaVelha
         // # Método Mostrar a interface inicial do jogo
         public static void MostrarInterfaceJogo()
         {
-            Console.ForegroundColor = ConsoleColor.Black;
-            Console.BackgroundColor = ConsoleColor.Red;
-            Console.WriteLine("-----------------  BEM-VINDO AO JOGO DA VELHA  -----------------\n");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.BackgroundColor = ConsoleColor.DarkRed;
+            Console.WriteLine("###  BEM-VINDO AO JOGO DA VELHA  ###\n");
             Console.ResetColor();
 
 
@@ -84,18 +84,17 @@ namespace JogoDaVelha
                 // Método para perguntar ao usuário se ele deseja X ou O para preencher na matriz e trocar os números da matriz pela escolha do jogar X ou O
                 EscolhaJogador(jogarDeNovo);
 
-                // # Método que verifica o empate do jogo atual
+                // # Método que verifica se deu velha
                 VerificaEmpate(jogarDeNovo);
 
+                // # Método que verifica se a vitória é diagonal e pergunta se deseja jogar de novo
+                VerificaVitoriaDiagonal(jogarDeNovo);
+                
                 // # Método que verifica se a vitória é horizontal e pergunta se deseja jogar de novo
                 VerificaVitoriaHorizontal(jogarDeNovo);
 
                 // # Método que verifica se a vitória é vertical e pergunta se deseja jogar de novo
                 VerificaVitoriaVertical(jogarDeNovo);
-
-                // # Método que verifica se a vitória é diagonal e pergunta se deseja jogar de novo
-                VerificaVitoriaDiagonal(jogarDeNovo);
-
             } while (jogarDeNovo != "NAO" && jogarDeNovo != "NÃO");
 
 

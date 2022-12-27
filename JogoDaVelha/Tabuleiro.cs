@@ -16,6 +16,9 @@ namespace JogoDaVelha
         public static string escolhaJogador1;
         public static string escolhaJogador2;
 
+        public static int pontuacaoJogador1 = 0;
+        public static int pontuacaoJogador2 = 0;
+
         // # Método que preenche tabuleiro com números, para o usuário preencher com X ou O
         public static void PreencherTabuleiro()
         {
@@ -71,7 +74,6 @@ namespace JogoDaVelha
         // # Método para saber qual valor do intervalo [0-9] o usuário vai querer substituir pelo X ou O
         public static void EscolhaJogador(string jogarDeNovo)
         {
-
             Console.Write($"\nJogador {Program.jogador1.nome} - Escolha o valor do tabuleiro que você quer preencher {Program.jogador1.letraJogo}: ");
             escolhaJogador1 = Console.ReadLine();
 
@@ -104,17 +106,32 @@ namespace JogoDaVelha
         // # Método para perguntar ao usuário se ele deseja jogar de novo
         public static void JogarDeNovo(string jogarDeNovo)
         {
-            Console.Write("Deseja jogar de novo SIM ou NÃO: ");
-            jogarDeNovo = Console.ReadLine().ToUpper();
+            do
+            {
+                Console.WriteLine("\n1 - Jogar de novo");
+                Console.WriteLine("2 - Ver pontuação dos jogadores");
+                Console.WriteLine("3 - Sair do jogo\n");
 
-            if (jogarDeNovo == "SIM")
-            {
-                Program.IniciarJogo();
-            }
-            else
-            {
-                System.Environment.Exit(0);
-            }
+                Console.Write("Digite: ");
+
+                jogarDeNovo = Console.ReadLine();
+                switch (jogarDeNovo)
+                {
+                    case "1":
+                        Program.IniciarJogo();
+                        PreencherTabuleiro();
+                        break;
+                    case "2":
+                        Console.Clear();
+                        MostrarPontuacao();
+                        break;
+                    case "3":
+                        System.Environment.Exit(0);
+                        break;
+                }
+
+            } while (jogarDeNovo != "3");
+
         }
         
         // # Método para verificar matriz na horizontal e ver se teve X X X ou O O O  na horizontal
@@ -177,35 +194,34 @@ namespace JogoDaVelha
             // # Mostra mensagem caso a vitória tenha sido horizontal tanto de X como de O
             if (Program.jogador1.letraJogo == "X" && linhaHorizontalX)
             {
-                Console.WriteLine($"\nJogador {Program.jogador1.nome} Venceu a partida :D");
-
+                Console.WriteLine($"\nJogador {Program.jogador1.nome} Venceu a partida !");
+                pontuacaoJogador1++;
                 MostrarTabuleiro();
-                PreencherTabuleiro();
                 JogarDeNovo(jogarDeNovo);
 
             }
             if (Program.jogador1.letraJogo == "O" && linhaHorizontalO)
             {
-                Console.WriteLine($"\nJogador {Program.jogador1.nome} Venceu a partida :D");
-
+                Console.WriteLine($"\nJogador {Program.jogador1.nome} Venceu a partida !");
+                pontuacaoJogador1++;
                 MostrarTabuleiro();
-                PreencherTabuleiro();
+
                 JogarDeNovo(jogarDeNovo);
             }
             if (Program.jogador2.letraJogo == "X" && linhaHorizontalX)
             {
-                Console.WriteLine($"\nJogador {Program.jogador2.nome} Venceu a partida :D");
-
+                Console.WriteLine($"\nJogador {Program.jogador2.nome} Venceu a partida !");
+                pontuacaoJogador2++;
                 MostrarTabuleiro();
-                PreencherTabuleiro();
+
                 JogarDeNovo(jogarDeNovo);
             }
             if (Program.jogador2.letraJogo == "O" && linhaHorizontalO)
             {
-                Console.WriteLine($"\nJogador {Program.jogador2.nome} Venceu a partida :D");
-              
+                Console.WriteLine($"\nJogador {Program.jogador2.nome} Venceu a partida !");
+                pontuacaoJogador2++;
                 MostrarTabuleiro();
-                PreencherTabuleiro();
+
                 JogarDeNovo(jogarDeNovo);
             }
 
@@ -451,6 +467,13 @@ namespace JogoDaVelha
 
                 }
             }
+        }
+
+        // # Método para armazenar pontuação dos jogadores
+        public static void MostrarPontuacao()
+        {
+            Console.WriteLine($"\nPontuação jogador {Program.jogador1.nome} está com {pontuacaoJogador1} pontos");
+            Console.WriteLine($"\nPontuação jogador {Program.jogador2.nome} está com {pontuacaoJogador2} pontos");
         }
 
     }

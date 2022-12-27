@@ -12,10 +12,8 @@ namespace JogoDaVelha
         // # Método Mostrar a interface inicial do jogo
         public static void MostrarInterfaceJogo()
         {
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.BackgroundColor = ConsoleColor.DarkRed;
-            Console.WriteLine("###  BEM-VINDO AO JOGO DA VELHA  ###\n");
-            Console.ResetColor();
+            // # Menu inicial
+            EstilizarMenu("BEM-VINDO AO JOGO DA VELHA");
 
 
             // # Variável escolha do usuário
@@ -56,9 +54,7 @@ namespace JogoDaVelha
                 }
                 else
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("\n------ Encerrando aplicação ------");
-                    Console.ResetColor();
+                    EstilizarMenu("\n------ Encerrando aplicação ------");
                     break;
                 }
             }

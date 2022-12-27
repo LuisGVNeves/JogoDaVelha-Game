@@ -108,7 +108,10 @@ namespace JogoDaVelha
         {
             do
             {
-                Console.WriteLine("\n1 - Jogar de novo");
+                // # Interface do submenu
+                EstilizarMenu("SubMenu Xadrex");
+
+                Console.WriteLine("\n\n1 - Jogar de novo");
                 Console.WriteLine("2 - Ver pontuação dos jogadores");
                 Console.WriteLine("3 - Sair do jogo\n");
 
@@ -118,6 +121,13 @@ namespace JogoDaVelha
                 switch (jogarDeNovo)
                 {
                     case "1":
+                        System.Threading.Thread.Sleep(2000);
+                        Console.Clear();
+
+                        // Interface do xadrex
+                        EstilizarMenu("Xadrex");
+
+                        // # Vai iniciar o jogo e resetar o intervalo [0-9]
                         Program.IniciarJogo();
                         PreencherTabuleiro();
                         break;
@@ -197,14 +207,20 @@ namespace JogoDaVelha
                 Console.WriteLine($"\nJogador {Program.jogador1.nome} Venceu a partida !");
                 pontuacaoJogador1++;
                 MostrarTabuleiro();
-                JogarDeNovo(jogarDeNovo);
 
+                System.Threading.Thread.Sleep(3000);
+                Console.Clear();
+
+                JogarDeNovo(jogarDeNovo);
             }
             if (Program.jogador1.letraJogo == "O" && linhaHorizontalO)
             {
                 Console.WriteLine($"\nJogador {Program.jogador1.nome} Venceu a partida !");
                 pontuacaoJogador1++;
                 MostrarTabuleiro();
+
+                System.Threading.Thread.Sleep(3000);
+                Console.Clear();
 
                 JogarDeNovo(jogarDeNovo);
             }
@@ -214,6 +230,9 @@ namespace JogoDaVelha
                 pontuacaoJogador2++;
                 MostrarTabuleiro();
 
+                System.Threading.Thread.Sleep(3000);
+                Console.Clear();
+
                 JogarDeNovo(jogarDeNovo);
             }
             if (Program.jogador2.letraJogo == "O" && linhaHorizontalO)
@@ -221,6 +240,9 @@ namespace JogoDaVelha
                 Console.WriteLine($"\nJogador {Program.jogador2.nome} Venceu a partida !");
                 pontuacaoJogador2++;
                 MostrarTabuleiro();
+
+                System.Threading.Thread.Sleep(3000);
+                Console.Clear();
 
                 JogarDeNovo(jogarDeNovo);
             }
@@ -476,5 +498,21 @@ namespace JogoDaVelha
             Console.WriteLine($"\nPontuação jogador {Program.jogador2.nome} está com {pontuacaoJogador2} pontos");
         }
 
+
+        // # Método para estilizar a interface do terminal
+        public static void EstilizarMenu(string texto)
+        {
+            Console.BackgroundColor = ConsoleColor.Red;
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.Write("                     ");
+            Console.Write("┌─┐");
+            Console.Write("└─┘");
+            Console.Write($"  {texto}  ");
+            Console.Write("┌─┐");
+            Console.Write("└─┘");
+            Console.Write("                     ");
+            Console.WriteLine("\n");
+            Console.ResetColor();
+        }
     }
 }

@@ -41,12 +41,11 @@ namespace JogoDaVelha
                     }
                     else
                     {
-                        jogador1.letraJogo = "O";
                         jogador2.letraJogo = "X";
                     }
 
                     Console.WriteLine($"\nJogador {jogador1.nome} começa com: {jogador1.letraJogo}");
-                    Console.WriteLine($"\nJogador {jogador2.nome} começa com: {jogador2.letraJogo}\n");
+                    Console.WriteLine($"\nJogador {jogador2.nome} começa com: {jogador2.letraJogo}");
 
                     // # Inicia o game
                     IniciarJogo();
@@ -54,7 +53,7 @@ namespace JogoDaVelha
                 }
                 else
                 {
-                    EstilizarMenu("\n------ Encerrando aplicação ------");
+                    EstilizarMenu("Encerrando aplicação");
                     break;
                 }
             }

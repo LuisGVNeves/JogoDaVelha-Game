@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -41,31 +43,31 @@ namespace JogoDaVelha
                     tabuleiro[2, 0] = "7";
                     tabuleiro[2, 1] = "8";
                     tabuleiro[2, 2] = "9";
+
+
                 }
 		    }
         }
 
+
         // # Método Mostrar Tabuleiro
         public static void MostrarTabuleiro()
         {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine($"\n {tabuleiro[0,0]}  | {tabuleiro[0,1]} |  {tabuleiro[0,2]}");
-
-            Console.ForegroundColor = ConsoleColor.DarkGray;
-            Console.WriteLine("------------");
-            Console.ResetColor();
-
-            
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine($" {tabuleiro[1,0]}  | {tabuleiro[1,1]} |  {tabuleiro[1,2]}");
+            Console.WriteLine($"\n\n                             {tabuleiro[0, 0]}  | {tabuleiro[0, 1]} | {tabuleiro[0, 2]}");
 
 
             Console.ForegroundColor = ConsoleColor.DarkGray;
-            Console.Write("------------\n");
-            Console.ResetColor();
+            Console.WriteLine("                            ------------");
 
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine($" {tabuleiro[2,0]}  | {tabuleiro[2,1]} |  {tabuleiro[2,2]}\n");
+            Console.WriteLine($"                             {tabuleiro[1, 0]}  | {tabuleiro[1, 1]} | {tabuleiro[1, 2]}");
+
+
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.Write("                            ------------\n");
+
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"                             {tabuleiro[2, 0]}  | {tabuleiro[2, 1]} | {tabuleiro[2, 2]}\n");
             Console.ResetColor();
 
 
@@ -75,6 +77,7 @@ namespace JogoDaVelha
         public static void EscolhaJogador(string jogarDeNovo)
         {
             Console.Write($"\nJogador {Program.jogador1.nome} - Escolha o valor do tabuleiro que você quer preencher {Program.jogador1.letraJogo}: ");
+
             escolhaJogador1 = Console.ReadLine();
 
             // Verifica se numero que usuario quer é maior que o intervalo [0-9]
@@ -101,15 +104,35 @@ namespace JogoDaVelha
                 escolhaJogador2 = novoNumero;
             }
 
+            // # Caso usuário escolha o mesmo numero já preenchido na matriz
+            if (int.Parse(escolhaJogador1) == int.Parse(escolhaJogador2))
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write("\n\nNúmero já preenchido escolha outro: ");
+                Console.ResetColor();
+
+                string novoNumero = Console.ReadLine();
+                escolhaJogador2 = novoNumero;
+            }
+            if (int.Parse(escolhaJogador2) == int.Parse(escolhaJogador1))
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write("\n\nNúmero já preenchido escolha outro: ");
+                Console.ResetColor();
+
+                string novoNumero = Console.ReadLine();
+                escolhaJogador1 = novoNumero;
+            }
+
         }
 
         // # Método para perguntar ao usuário se ele deseja jogar de novo
         public static void JogarDeNovo(string jogarDeNovo)
         {
+            // # Interface do submenu
+            EstilizarMenu("SubMenu Xadrex");
             do
             {
-                // # Interface do submenu
-                EstilizarMenu("SubMenu Xadrex");
 
                 Console.WriteLine("\n\n1 - Jogar de novo");
                 Console.WriteLine("2 - Ver pontuação dos jogadores");
@@ -133,9 +156,15 @@ namespace JogoDaVelha
                         break;
                     case "2":
                         Console.Clear();
+
+                        // Interface do xadrex
+                        EstilizarMenu("Pontuação");
+                        
                         MostrarPontuacao();
                         break;
                     case "3":
+                        Console.Clear();
+                        EstilizarMenu("--------------   Encerrando aplicação  --------------");
                         System.Environment.Exit(0);
                         break;
                 }
@@ -204,7 +233,11 @@ namespace JogoDaVelha
             // # Mostra mensagem caso a vitória tenha sido horizontal tanto de X como de O
             if (Program.jogador1.letraJogo == "X" && linhaHorizontalX)
             {
-                Console.WriteLine($"\nJogador {Program.jogador1.nome} Venceu a partida !");
+                
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"\n\nJogador {Program.jogador1.nome} Venceu a partida !");
+                Console.ResetColor();
+
                 pontuacaoJogador1++;
                 MostrarTabuleiro();
 
@@ -215,7 +248,10 @@ namespace JogoDaVelha
             }
             if (Program.jogador1.letraJogo == "O" && linhaHorizontalO)
             {
-                Console.WriteLine($"\nJogador {Program.jogador1.nome} Venceu a partida !");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"\n\nJogador {Program.jogador1.nome} Venceu a partida ! Horário: ");
+                Console.ResetColor();
+
                 pontuacaoJogador1++;
                 MostrarTabuleiro();
 
@@ -226,7 +262,10 @@ namespace JogoDaVelha
             }
             if (Program.jogador2.letraJogo == "X" && linhaHorizontalX)
             {
-                Console.WriteLine($"\nJogador {Program.jogador2.nome} Venceu a partida !");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"\n\nJogador {Program.jogador2.nome} Venceu a partida ! Horário: ");
+                Console.ResetColor();
+
                 pontuacaoJogador2++;
                 MostrarTabuleiro();
 
@@ -237,7 +276,10 @@ namespace JogoDaVelha
             }
             if (Program.jogador2.letraJogo == "O" && linhaHorizontalO)
             {
-                Console.WriteLine($"\nJogador {Program.jogador2.nome} Venceu a partida !");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"\n\nJogador {Program.jogador2.nome} Venceu a partida ! Horário: ");
+                Console.ResetColor();
+
                 pontuacaoJogador2++;
                 MostrarTabuleiro();
 
@@ -306,30 +348,58 @@ namespace JogoDaVelha
             // # Mostra mensagem caso a vitória tenha sido vertical tanto de X como de O
             if (Program.jogador1.letraJogo == "X" && linhaVerticalX)
             {
-                Console.WriteLine($"\nJogador {Program.jogador1.nome} Venceu a partida :D");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"\n\nJogador {Program.jogador1.nome} Venceu a partida :D");
+                Console.ResetColor();
+
+                pontuacaoJogador1++;
                 MostrarTabuleiro();
-                PreencherTabuleiro();
+
+                System.Threading.Thread.Sleep(3000);
+                Console.Clear();
+
                 JogarDeNovo(jogarDeNovo);
             }
             if (Program.jogador1.letraJogo == "O" && linhaVerticalO)
             {
-                Console.WriteLine($"\nJogador {Program.jogador1.nome} Venceu a partida :D");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"\n\nJogador {Program.jogador1.nome} Venceu a partida :D");
+                Console.ResetColor();
+
+                pontuacaoJogador1++;
                 MostrarTabuleiro();
-                PreencherTabuleiro();
+
+                System.Threading.Thread.Sleep(3000);
+                Console.Clear();
+
                 JogarDeNovo(jogarDeNovo);
             }
             if (Program.jogador2.letraJogo == "X" && linhaVerticalX)
             {
-                Console.WriteLine($"\nJogador {Program.jogador2.nome} Venceu a partida :D");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"\n\nJogador {Program.jogador2.nome} Venceu a partida :D");
+                Console.ResetColor();
+
+                pontuacaoJogador2++;
                 MostrarTabuleiro();
-                PreencherTabuleiro();
+
+                System.Threading.Thread.Sleep(3000);
+                Console.Clear();
+
                 JogarDeNovo(jogarDeNovo);
             }
             if (Program.jogador2.letraJogo == "O" && linhaVerticalO)
             {
-                Console.WriteLine($"\nJogador {Program.jogador2.nome} Venceu a partida :D");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"\n\nJogador {Program.jogador2.nome} Venceu a partida :D");
+                Console.ResetColor();
+
+                pontuacaoJogador2++;
                 MostrarTabuleiro();
-                PreencherTabuleiro();
+
+                System.Threading.Thread.Sleep(3000);
+                Console.Clear();
+
                 JogarDeNovo(jogarDeNovo);
             }
 
@@ -404,30 +474,58 @@ namespace JogoDaVelha
             // # Mostra mensagem caso a vitória tenha sido vertical tanto de X como de O
             if (Program.jogador1.letraJogo == "X" && linhaDiagonalX)
             {
-                Console.WriteLine($"\nJogador {Program.jogador1.nome} Venceu a partida :D");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"\n\nJogador {Program.jogador1.nome} Venceu a partida :D");
+                Console.ResetColor();
+
+                pontuacaoJogador1++;
                 MostrarTabuleiro();
-                PreencherTabuleiro();
+
+                System.Threading.Thread.Sleep(3000);
+                Console.Clear();
+
                 JogarDeNovo(jogarDeNovo);
             }
             if (Program.jogador1.letraJogo == "O" && linhaDiagonalO)
             {
-                Console.WriteLine($"\nJogador {Program.jogador1.nome} Venceu a partida :D");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"\n\nJogador {Program.jogador1.nome} Venceu a partida :D");
+                Console.ResetColor();
+
+                pontuacaoJogador1++;
                 MostrarTabuleiro();
-                PreencherTabuleiro();
+
+                System.Threading.Thread.Sleep(3000);
+                Console.Clear();
+
                 JogarDeNovo(jogarDeNovo);
             }
             if (Program.jogador2.letraJogo == "X" && linhaDiagonalX)
             {
-                Console.WriteLine($"\nJogador {Program.jogador2.nome} Venceu a partida :D");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"\n\nJogador {Program.jogador2.nome} Venceu a partida :D");
+                Console.ResetColor();
+
+                pontuacaoJogador2++;
                 MostrarTabuleiro();
-                PreencherTabuleiro();
+
+                System.Threading.Thread.Sleep(3000);
+                Console.Clear();
+
                 JogarDeNovo(jogarDeNovo);
             }
             if (Program.jogador2.letraJogo == "O" && linhaDiagonalO)
             {
-                Console.WriteLine($"\nJogador {Program.jogador2.nome} Venceu a partida :D");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"\n\nJogador {Program.jogador2.nome} Venceu a partida :D");
+                Console.ResetColor();
+
+                pontuacaoJogador2++;
                 MostrarTabuleiro();
-                PreencherTabuleiro();
+
+                System.Threading.Thread.Sleep(3000);
+                Console.Clear();
+
                 JogarDeNovo(jogarDeNovo);
             }
 
@@ -482,7 +580,14 @@ namespace JogoDaVelha
                     else
                     {
                         MostrarTabuleiro();
-                        Console.WriteLine("\nDeu velha");
+
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("\n***  Deu velha  ***");
+                        Console.ResetColor();
+
+                        System.Threading.Thread.Sleep(3000);
+                        Console.Clear();
+
                         JogarDeNovo(jogarDeNovo);
                     }
 
@@ -494,14 +599,14 @@ namespace JogoDaVelha
         // # Método para armazenar pontuação dos jogadores
         public static void MostrarPontuacao()
         {
-            Console.WriteLine($"\nPontuação jogador {Program.jogador1.nome} está com {pontuacaoJogador1} pontos");
-            Console.WriteLine($"\nPontuação jogador {Program.jogador2.nome} está com {pontuacaoJogador2} pontos");
+            Console.WriteLine($"\nJogador {Program.jogador1.nome} está com {pontuacaoJogador1} pontos");
+            Console.WriteLine($"\nJogador {Program.jogador2.nome} está com {pontuacaoJogador2} pontos");
         }
-
 
         // # Método para estilizar a interface do terminal
         public static void EstilizarMenu(string texto)
         {
+            Console.Clear();
             Console.BackgroundColor = ConsoleColor.Red;
             Console.ForegroundColor = ConsoleColor.Black;
             Console.Write("                     ");

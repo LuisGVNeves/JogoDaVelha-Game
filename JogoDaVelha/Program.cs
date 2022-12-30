@@ -13,7 +13,7 @@ namespace JogoDaVelha
         public static void MostrarInterfaceJogo()
         {
             // # Menu inicial
-            EstilizarMenu("BEM-VINDO AO JOGO DA VELHA");
+            EstilizarMenu("BEM-VINDO AO JOGO DA VELHA", ConsoleColor.Red);
 
 
             // # Variável escolha do usuário
@@ -53,7 +53,7 @@ namespace JogoDaVelha
                 }
                 else
                 {
-                    EstilizarMenu("Encerrando aplicação");
+                    EstilizarMenu("Encerrando aplicação", ConsoleColor.Red);
                     break;
                 }
             }

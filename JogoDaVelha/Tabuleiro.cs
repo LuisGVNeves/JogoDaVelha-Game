@@ -143,7 +143,7 @@ namespace JogoDaVelha
         public static void JogarDeNovo(string jogarDeNovo)
         {
             // # Interface do submenu
-            EstilizarMenu("SubMenu Xadrex");
+            EstilizarMenu("SubMenu Xadrex", ConsoleColor.Red);
 
             do
             {
@@ -162,7 +162,7 @@ namespace JogoDaVelha
                         Console.Clear();
 
                         // Interface do xadrex
-                        EstilizarMenu("Xadrex");
+                        EstilizarMenu("Xadrex", ConsoleColor.DarkRed);
 
                         // # Vai iniciar o jogo e resetar o intervalo [0-9]
                         Program.IniciarJogo();
@@ -173,15 +173,14 @@ namespace JogoDaVelha
                         Console.Clear();
 
                         // Interface do xadrex
-                        EstilizarMenu("Pontuação");
+                        EstilizarMenu("Pontuação", ConsoleColor.DarkGreen);
                         
                         MostrarPontuacao();
                         break;
                     case "3":
-                        System.Threading.Thread.Sleep(2000);
                         Console.Clear();
 
-                        EstilizarMenu("--------------   Encerrando aplicação  --------------");
+                        EstilizarMenu("--------------   Encerrando aplicação  --------------", ConsoleColor.Red);
                         System.Environment.Exit(0);
                         break;
                 }
@@ -616,16 +615,38 @@ namespace JogoDaVelha
         // # Método para armazenar pontuação dos jogadores
         public static void MostrarPontuacao()
         {
-            Console.WriteLine($"\nJogador {Program.jogador1.nome} está com {pontuacaoJogador1} pontos");
-            Console.WriteLine($"\nJogador {Program.jogador2.nome} está com {pontuacaoJogador2} pontos");
-            Console.WriteLine("\n------------------------------------------------------------------------\n");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write("[ ");
+            Console.ResetColor();
+
+            Console.Write($"Jogador {Program.jogador1.nome} está com {pontuacaoJogador1} pontos");
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write(" ]");
+            Console.ResetColor();
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write(" [");
+            Console.ResetColor();
+
+
+            Console.Write($"Jogador {Program.jogador2.nome} está com {pontuacaoJogador2} pontos");
+            
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write(" ]");
+            Console.ResetColor();
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("\n\n------------------------------------------------------------------\n");
+            Console.ResetColor();
+
         }
 
         // # Método para estilizar a interface do terminal
-        public static void EstilizarMenu(string texto)
+        public static void EstilizarMenu(string texto, ConsoleColor cor)
         {
             Console.Clear();
-            Console.BackgroundColor = ConsoleColor.Red;
+            Console.BackgroundColor = cor;
             Console.ForegroundColor = ConsoleColor.Black;
             Console.Write("                     ");
             Console.Write("┌─┐");

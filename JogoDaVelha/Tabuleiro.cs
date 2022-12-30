@@ -49,12 +49,11 @@ namespace JogoDaVelha
 		    }
         }
 
-
         // # Método Mostrar Tabuleiro
         public static void MostrarTabuleiro()
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine($"\n\n                             {tabuleiro[0, 0]}  | {tabuleiro[0, 1]} | {tabuleiro[0, 2]}");
-
 
             Console.ForegroundColor = ConsoleColor.DarkGray;
             Console.WriteLine("                            ------------");
@@ -76,53 +75,67 @@ namespace JogoDaVelha
         // # Método para saber qual valor do intervalo [0-9] o usuário vai querer substituir pelo X ou O
         public static void EscolhaJogador(string jogarDeNovo)
         {
-            Console.Write($"\nJogador {Program.jogador1.nome} - Escolha o valor do tabuleiro que você quer preencher {Program.jogador1.letraJogo}: ");
-
-            escolhaJogador1 = Console.ReadLine();
-
-            // Verifica se numero que usuario quer é maior que o intervalo [0-9]
-            if(int.Parse(escolhaJogador1) < 0 || int.Parse(escolhaJogador1) > 9)
+            do
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.Write("\n\nNúmero não pertence ao intervalo [0-9] digite um número novamente: ");
-                Console.ResetColor();
+                // Verifica se numero que usuario quer é maior que o intervalo [0-9]
+                Console.Write($"\nJogador {Program.jogador1.nome} - Escolha o valor do tabuleiro que você quer preencher {Program.jogador1.letraJogo}: ");
+                escolhaJogador1 = Console.ReadLine();
+                if(int.Parse(escolhaJogador1) < 0 || int.Parse(escolhaJogador1) > 9)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.Write("\n\nNúmero não pertence ao intervalo [0-9] digite um número novamente: ");
+                    Console.ResetColor();
 
-                string novoNumero = Console.ReadLine();
-                escolhaJogador1 = novoNumero;
+                    string novoNumero = Console.ReadLine();
+                    escolhaJogador1 = novoNumero;
+                }
+
+
+                Console.Write($"\nJogador {Program.jogador2.nome} - Escolha o valor do tabuleiro que você quer preencher com {Program.jogador2.letraJogo}: ");
+                escolhaJogador2 = Console.ReadLine();
+                if (int.Parse(escolhaJogador2) < 0 || int.Parse(escolhaJogador2) > 9)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.Write("\n\nNúmero não pertence ao intervalo [0-9] digite um número novamente: ");
+                    Console.ResetColor();
+
+                    string novoNumero = Console.ReadLine();
+                    escolhaJogador2 = novoNumero;
+                }
+
+
+            }while (int.Parse(escolhaJogador1) <= 0 && int.Parse(escolhaJogador1) >= 9 && int.Parse(escolhaJogador2) <= 0 && int.Parse(escolhaJogador2) >= 9);
+
+
+            while(int.Parse(escolhaJogador1) == int.Parse(escolhaJogador2))
+            {
+                // # Caso usuário escolha o mesmo numero já preenchido na matriz
+                if (int.Parse(escolhaJogador1) == int.Parse(escolhaJogador2))
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.Write("\n\nNúmero já preenchido escolha outro: ");
+                    Console.ResetColor();
+
+                    string novoNumero = Console.ReadLine();
+                    escolhaJogador2 = novoNumero;
+                }
+                else if (int.Parse(escolhaJogador2) == int.Parse(escolhaJogador1))
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.Write("\n\nNúmero já preenchido escolha outro: ");
+                    Console.ResetColor();
+
+                    string novoNumero = Console.ReadLine();
+                    escolhaJogador1 = novoNumero;
+                }
+                else
+                {
+                    break;
+                }
             }
 
-            Console.Write($"\nJogador {Program.jogador2.nome} - Escolha o valor do tabuleiro que você quer preencher com {Program.jogador2.letraJogo}: ");
-            escolhaJogador2 = Console.ReadLine();
 
-            if (int.Parse(escolhaJogador2) < 0 || int.Parse(escolhaJogador2) > 9)
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.Write("\n\nNúmero não pertence ao intervalo [0-9] digite um número novamente: ");
-                Console.ResetColor();
 
-                string novoNumero = Console.ReadLine();
-                escolhaJogador2 = novoNumero;
-            }
-
-            // # Caso usuário escolha o mesmo numero já preenchido na matriz
-            if (int.Parse(escolhaJogador1) == int.Parse(escolhaJogador2))
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.Write("\n\nNúmero já preenchido escolha outro: ");
-                Console.ResetColor();
-
-                string novoNumero = Console.ReadLine();
-                escolhaJogador2 = novoNumero;
-            }
-            if (int.Parse(escolhaJogador2) == int.Parse(escolhaJogador1))
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.Write("\n\nNúmero já preenchido escolha outro: ");
-                Console.ResetColor();
-
-                string novoNumero = Console.ReadLine();
-                escolhaJogador1 = novoNumero;
-            }
 
         }
 
@@ -131,6 +144,7 @@ namespace JogoDaVelha
         {
             // # Interface do submenu
             EstilizarMenu("SubMenu Xadrex");
+
             do
             {
 
@@ -155,6 +169,7 @@ namespace JogoDaVelha
                         PreencherTabuleiro();
                         break;
                     case "2":
+                        System.Threading.Thread.Sleep(2000);
                         Console.Clear();
 
                         // Interface do xadrex
@@ -163,7 +178,9 @@ namespace JogoDaVelha
                         MostrarPontuacao();
                         break;
                     case "3":
+                        System.Threading.Thread.Sleep(2000);
                         Console.Clear();
+
                         EstilizarMenu("--------------   Encerrando aplicação  --------------");
                         System.Environment.Exit(0);
                         break;
@@ -601,6 +618,7 @@ namespace JogoDaVelha
         {
             Console.WriteLine($"\nJogador {Program.jogador1.nome} está com {pontuacaoJogador1} pontos");
             Console.WriteLine($"\nJogador {Program.jogador2.nome} está com {pontuacaoJogador2} pontos");
+            Console.WriteLine("\n------------------------------------------------------------------------\n");
         }
 
         // # Método para estilizar a interface do terminal

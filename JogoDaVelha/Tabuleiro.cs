@@ -94,6 +94,7 @@ namespace JogoDaVelha
         {
             do
             {
+
                 // Input do usuario
                 Console.Write($"\nJogador {Program.jogador1.nome} - Escolha o valor do tabuleiro que você quer preencher {Program.jogador1.letraJogo}: ");
                 escolhaJogador1 = Console.ReadLine();
@@ -111,7 +112,8 @@ namespace JogoDaVelha
                     string novoNumero = Console.ReadLine();
                     escolhaJogador1 = novoNumero;
                 }
-                
+
+
                 // Substituição na matriz do numero por X ou O
                 for (int linhas = 0; linhas < 3; linhas++)
                 {
@@ -119,13 +121,27 @@ namespace JogoDaVelha
                     {
                         if (tabuleiro[linhas,colunas] == escolhaJogador1)
                         {
+
                             tabuleiro[linhas, colunas] = Program.jogador1.letraJogo;
 
-                            System.Threading.Thread.Sleep(800);
+                            System.Threading.Thread.Sleep(200);
                             Console.Clear();
 
                             // # Decorar o menu
                             EstilizarMenu("Jogo da Velha", ConsoleColor.Red);
+
+                            // # Método que verifica se deu velha
+                            VerificaEmpate(jogarDeNovo);
+
+                            // # Método que verifica se a vitória é horizontal e pergunta se deseja jogar de novo
+                            VerificaVitoriaHorizontal(jogarDeNovo);
+
+                            // # Método que verifica se a vitória é vertical e pergunta se deseja jogar de novo
+                            VerificaVitoriaVertical(jogarDeNovo);
+
+                            // # Método que verifica se a vitória é diagonal e pergunta se deseja jogar de novo
+                            VerificaVitoriaDiagonal(jogarDeNovo);
+
                             MostrarTabuleiro();
 
                         }
@@ -140,6 +156,7 @@ namespace JogoDaVelha
 
                 // Casting do input do jogador
                 escolhaJogadorDois = int.Parse(escolhaJogador2);
+
 
                 // Checagem do intervalo [0-9]
                 if (escolhaJogadorDois < 0 || escolhaJogadorDois > 9)
@@ -159,18 +176,31 @@ namespace JogoDaVelha
                     {
                         if (tabuleiro[linhas, colunas] == escolhaJogador2)
                         {
+
                             tabuleiro[linhas, colunas] = Program.jogador2.letraJogo;
 
-                            System.Threading.Thread.Sleep(800);
+                            System.Threading.Thread.Sleep(200);
                             Console.Clear();
 
                             // # Decorar o menu
                             EstilizarMenu("Jogo da Velha", ConsoleColor.Red);
 
+                            // # Método que verifica se deu velha
+                            VerificaEmpate(jogarDeNovo);
+
+                            // # Método que verifica se a vitória é horizontal e pergunta se deseja jogar de novo
+                            VerificaVitoriaHorizontal(jogarDeNovo);
+
+                            // # Método que verifica se a vitória é vertical e pergunta se deseja jogar de novo
+                            VerificaVitoriaVertical(jogarDeNovo);
+
+                            // # Método que verifica se a vitória é diagonal e pergunta se deseja jogar de novo
+                            VerificaVitoriaDiagonal(jogarDeNovo);
                         }
 
                     }
                 }
+
 
 
                 // # Checagem para quando usuário escolha o mesmo numero já preenchido na matriz
@@ -199,6 +229,8 @@ namespace JogoDaVelha
                         break;
                     }
                 }
+               
+
 
             } while (escolhaJogadorUm <= 0 && escolhaJogadorUm >= 9 && escolhaJogadorDois <= 0 && escolhaJogadorDois >= 9);
 
@@ -209,8 +241,7 @@ namespace JogoDaVelha
         public static void JogarDeNovo(string jogarDeNovo)
         {
             // # Interface do submenu
-            EstilizarMenu("SubMenu Xadrex", ConsoleColor.Red);
-
+            EstilizarMenu("SubMenu Jogo da Velha", ConsoleColor.Blue);
             do
             {
 
@@ -228,11 +259,11 @@ namespace JogoDaVelha
                         Console.Clear();
 
                         // Interface do xadrex
-                        EstilizarMenu("Xadrex", ConsoleColor.DarkRed);
+                        EstilizarMenu("Jogo da Velha", ConsoleColor.DarkRed);
 
                         // # Vai iniciar o jogo e resetar o intervalo [0-9]
-                        Program.IniciarJogo();
                         PreencherTabuleiro();
+                        Program.IniciarJogo();
                         break;
                     case "2":
                         System.Threading.Thread.Sleep(1000);
@@ -634,16 +665,6 @@ namespace JogoDaVelha
                        (tabuleiro[2, 1] == "8"))
                     {
 
-                        // Substituindo o intervalo [0-9] para [X-O]
-                        if (tabuleiro[linhas, colunas] == escolhaJogador1)
-                        {
-                            tabuleiro[linhas, colunas] = Program.jogador1.letraJogo;
-                        }
-                        if (tabuleiro[linhas, colunas] == escolhaJogador2)
-                        {
-                            tabuleiro[linhas, colunas] = Program.jogador2.letraJogo;
-                        }
-
                         // Esses métodos logo após a verificação checam o intervalo [0-9] para ver se houve alguma vitória horizontal, vertical ou diagonal antes de cair no else que seria o empate
                         VerificaVitoriaHorizontal(jogarDeNovo);
                         VerificaVitoriaVertical(jogarDeNovo);
@@ -651,11 +672,11 @@ namespace JogoDaVelha
                     }
                     else
                     {
-                        MostrarTabuleiro();
-
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("\n***  Deu velha  ***");
                         Console.ResetColor();
+
+                        MostrarTabuleiro();
 
                         qtdEmpate++;
 

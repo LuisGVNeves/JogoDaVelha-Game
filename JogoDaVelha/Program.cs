@@ -26,17 +26,7 @@ namespace JogoDaVelha
                 // Método para perguntar ao usuário se ele deseja X ou O para preencher na matriz e trocar os números da matriz pela escolha do jogar X ou O
                 EscolhaJogador(jogarDeNovo);
 
-                // # Método que verifica se deu velha
-                VerificaEmpate(jogarDeNovo);
 
-                // # Método que verifica se a vitória é diagonal e pergunta se deseja jogar de novo
-                VerificaVitoriaDiagonal(jogarDeNovo);
-                
-                // # Método que verifica se a vitória é horizontal e pergunta se deseja jogar de novo
-                VerificaVitoriaHorizontal(jogarDeNovo);
-
-                // # Método que verifica se a vitória é vertical e pergunta se deseja jogar de novo
-                VerificaVitoriaVertical(jogarDeNovo);
             } while (jogarDeNovo != "NAO" && jogarDeNovo != "NÃO");
 
         }
@@ -48,6 +38,8 @@ namespace JogoDaVelha
             EstilizarMenu("BEM-VINDO AO JOGO DA VELHA SHARP CODERS", ConsoleColor.Red);
 
 
+            string jogarComPc;
+
             // # Variável escolha do usuário
             string escolhaUsuario;
             do
@@ -57,17 +49,16 @@ namespace JogoDaVelha
 
                 if (escolhaUsuario == "SIM")
                 {
-                    
                     Console.Write("\nDigite o nome do 1 jogador: ");
 
-                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    Console.ForegroundColor = ConsoleColor.Red;
                     jogador1.nome = Console.ReadLine();
                     Console.ResetColor();
 
 
                     Console.Write("Digite o nome do 2 jogador: ");
-                    
-                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+
+                    Console.ForegroundColor = ConsoleColor.Red;
                     jogador2.nome = Console.ReadLine();
                     Console.ResetColor();
 
@@ -85,16 +76,22 @@ namespace JogoDaVelha
                         jogador2.letraJogo = "X";
                     }
 
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("\n------------------------------------------------------------");
+                    Console.ResetColor();
+
                     Console.WriteLine($"\nJogador {jogador1.nome} começa com: {jogador1.letraJogo}");
                     Console.WriteLine($"\nJogador {jogador2.nome} começa com: {jogador2.letraJogo}\n");
+
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("------------------------------------------------------------");
+                    Console.ResetColor();
 
                     System.Threading.Thread.Sleep(2000);
                     Console.Clear();
 
                     // # Decorar o menu antes de iniciar o game
-                    EstilizarMenu("Jogo da Velha",ConsoleColor.Red);
+                    EstilizarMenu("Jogo da Velha", ConsoleColor.Red);
 
                     // # Inicia o game
                     IniciarJogo();

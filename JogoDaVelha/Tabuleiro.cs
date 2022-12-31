@@ -20,6 +20,7 @@ namespace JogoDaVelha
 
         public static int pontuacaoJogador1 = 0;
         public static int pontuacaoJogador2 = 0;
+        public static int qtdEmpate = 0;
 
         // # Método que preenche tabuleiro com números, para o usuário preencher com X ou O
         public static void PreencherTabuleiro()
@@ -53,20 +54,20 @@ namespace JogoDaVelha
         public static void MostrarTabuleiro()
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine($"\n\n                             {tabuleiro[0, 0]}  | {tabuleiro[0, 1]} | {tabuleiro[0, 2]}");
+            Console.WriteLine($"\n\n                             {tabuleiro[0, 0]} | {tabuleiro[0, 1]} | {tabuleiro[0, 2]}");
 
             Console.ForegroundColor = ConsoleColor.DarkGray;
-            Console.WriteLine("                            ------------");
+            Console.WriteLine("                            -----------");
 
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine($"                             {tabuleiro[1, 0]}  | {tabuleiro[1, 1]} | {tabuleiro[1, 2]}");
+            Console.WriteLine($"                             {tabuleiro[1, 0]} | {tabuleiro[1, 1]} | {tabuleiro[1, 2]}");
 
 
             Console.ForegroundColor = ConsoleColor.DarkGray;
-            Console.Write("                            ------------\n");
+            Console.Write("                            -----------\n");
 
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine($"                             {tabuleiro[2, 0]}  | {tabuleiro[2, 1]} | {tabuleiro[2, 2]}\n");
+            Console.WriteLine($"                             {tabuleiro[2, 0]} | {tabuleiro[2, 1]} | {tabuleiro[2, 2]}\n");
             Console.ResetColor();
 
 
@@ -431,6 +432,7 @@ namespace JogoDaVelha
             {
                 for (int colunas = 0; colunas < 3; colunas++)
                 {
+                    
                     // Coluna diagonal verificando X
 
                     linhaDiagonalX =
@@ -569,14 +571,6 @@ namespace JogoDaVelha
                        (tabuleiro[2, 0] == "7") ||
                        (tabuleiro[2, 1] == "8"))
                     {
-                        // Caso jogador2 queira preencher o mesmo campo que o jogador 1 já marcou que queria preencher
-                        if (escolhaJogador2 == escolhaJogador1)
-                        {
-                            Console.Write("\nCampo já preenchido, por favor digite um campo que não foi usado: ");
-                            string novoCampo = Console.ReadLine();
-
-                            escolhaJogador2 = novoCampo;
-                        }
 
                         // Substituindo o intervalo [0-9] para [X-O]
                         if (tabuleiro[linhas, colunas] == escolhaJogador1)
@@ -600,6 +594,8 @@ namespace JogoDaVelha
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("\n***  Deu velha  ***");
                         Console.ResetColor();
+
+                        qtdEmpate++;
 
                         System.Threading.Thread.Sleep(3000);
                         Console.Clear();
@@ -635,6 +631,30 @@ namespace JogoDaVelha
             Console.ForegroundColor = ConsoleColor.Green;
             Console.Write(" ]");
             Console.ResetColor();
+
+            Console.WriteLine("\n\n");
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write("[ ");
+            Console.ResetColor();
+
+            Console.Write($"Quantidade de empates: {qtdEmpate}");
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write(" ]");
+            Console.ResetColor();
+
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write("   [ ");
+            Console.ResetColor();
+
+            Console.Write($"Quantidade de jogadas: {qtdEmpate + pontuacaoJogador1 + pontuacaoJogador2}");
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write(" ]");
+            Console.ResetColor();
+
 
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("\n\n------------------------------------------------------------------\n");

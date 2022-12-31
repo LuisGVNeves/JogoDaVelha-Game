@@ -1,4 +1,5 @@
-﻿using static JogoDaVelha.Tabuleiro;
+﻿using System.Net.NetworkInformation;
+using static JogoDaVelha.Tabuleiro;
 
 namespace JogoDaVelha
 {
@@ -25,6 +26,7 @@ namespace JogoDaVelha
 
                 if (escolhaUsuario == "SIM")
                 {
+
                     Console.Write("\nDigite o nome do 1 jogador: ");
                     jogador1.nome = Console.ReadLine();
 
@@ -92,8 +94,6 @@ namespace JogoDaVelha
                 VerificaVitoriaVertical(jogarDeNovo);
             } while (jogarDeNovo != "NAO" && jogarDeNovo != "NÃO");
 
-
-
         }
 
 
@@ -101,7 +101,6 @@ namespace JogoDaVelha
         {
             MostrarInterfaceJogo();
         }
-
 
     }
 

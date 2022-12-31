@@ -19,5 +19,7 @@ namespace JogoDaVelha
             this.pontuacao = pontuacao;
             this.letraJogo = letraJogo;
         }
+
+
     }
 }

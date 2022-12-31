@@ -90,6 +90,12 @@ namespace JogoDaVelha
                     Console.WriteLine($"\nJogador {jogador2.nome} começa com: {jogador2.letraJogo}\n");
                     Console.WriteLine("------------------------------------------------------------");
 
+                    System.Threading.Thread.Sleep(2000);
+                    Console.Clear();
+
+                    // # Decorar o menu antes de iniciar o game
+                    EstilizarMenu("Jogo da Velha",ConsoleColor.Red);
+
                     // # Inicia o game
                     IniciarJogo();
                     break;

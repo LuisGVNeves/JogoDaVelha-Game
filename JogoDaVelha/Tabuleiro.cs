@@ -56,45 +56,53 @@ namespace JogoDaVelha
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(@"
-                         ╔══════════╗");
+                              ╔═══════════╗");
             Console.ResetColor();
 
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine($"                           { tabuleiro[0, 0]} | {tabuleiro[0, 1]} | {tabuleiro[0, 2]}");
+            Console.WriteLine($"                                {tabuleiro[0, 0]} | {tabuleiro[0, 1]} | {tabuleiro[0, 2] } ");
             Console.ForegroundColor = ConsoleColor.DarkGray;
-            Console.WriteLine("                          -----------");
+            Console.WriteLine("                               -----------");
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine($"                           {tabuleiro[1, 0]} | {tabuleiro[1, 1]} | {tabuleiro[1, 2]}");
+            Console.WriteLine($"                                {tabuleiro[1, 0]} | {tabuleiro[1, 1]} | {tabuleiro[1, 2] } ");
             Console.ForegroundColor = ConsoleColor.DarkGray;
-            Console.Write("                          -----------\n");
+            Console.Write("                               -----------\n");
             Console.ForegroundColor = ConsoleColor.White;
-            Console.Write($"                           {tabuleiro[2, 0]} | {tabuleiro[2, 1]} | {tabuleiro[2, 2]}");
+            Console.Write($"                                {tabuleiro[2, 0]} | {tabuleiro[2, 1]} | {tabuleiro[2, 2] } ");
             Console.ResetColor();
             
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(@"
-                         ╚══════════╝");
+                              ╚═══════════╝");
             Console.ResetColor();
         }
 
 
         /*
-            Verificação jogador 1 e 2:
+            Método EscolhaJogador - Verificação jogador 1 e 2:
             - Pegar o input do jogador para saber qual valor da matriz ele deseja substituir pelo X ou O
             - Verificar se esse input está no intervalo de [0-9]
             - Por ultimo percorro a matriz novamente substituindo o Número do input que o usuário digitou, pela letra que
             está no jogador
             - Isso tudo está em loop infinito até que o usuário digite o número no intervalo correto da matriz [0-9]
         */
+        
+        // Casting da escolha do jogador
+        public static int escolhaJogadorUm;
+        public static int escolhaJogadorDois;
         public static void EscolhaJogador(string jogarDeNovo)
         {
             do
             {
+                // Input do usuario
                 Console.Write($"\nJogador {Program.jogador1.nome} - Escolha o valor do tabuleiro que você quer preencher {Program.jogador1.letraJogo}: ");
-
                 escolhaJogador1 = Console.ReadLine();
-                
-                if(int.Parse(escolhaJogador1) < 0 || int.Parse(escolhaJogador1) > 9)
+
+                // Casting do input do jogador
+                escolhaJogadorUm = int.Parse(escolhaJogador1);
+
+                // Checagem do intervalo [0-9]
+                if (escolhaJogadorUm < 0 || escolhaJogadorUm > 9)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.Write("\n\nNúmero não pertence ao intervalo [0-9] digite um número novamente: ");
@@ -103,8 +111,8 @@ namespace JogoDaVelha
                     string novoNumero = Console.ReadLine();
                     escolhaJogador1 = novoNumero;
                 }
-
-
+                
+                // Substituição na matriz do numero por X ou O
                 for (int linhas = 0; linhas < 3; linhas++)
                 {
                     for (int colunas = 0; colunas < 3; colunas++)
@@ -112,21 +120,29 @@ namespace JogoDaVelha
                         if (tabuleiro[linhas,colunas] == escolhaJogador1)
                         {
                             tabuleiro[linhas, colunas] = Program.jogador1.letraJogo;
+
                             System.Threading.Thread.Sleep(800);
                             Console.Clear();
+
+                            // # Decorar o menu
+                            EstilizarMenu("Jogo da Velha", ConsoleColor.Red);
                             MostrarTabuleiro();
+
                         }
 
                     }
                 }
 
 
-
+                // Input do usuario
                 Console.Write($"\nJogador {Program.jogador2.nome} - Escolha o valor do tabuleiro que você quer preencher com {Program.jogador2.letraJogo}: ");
-
                 escolhaJogador2 = Console.ReadLine();
 
-                if (int.Parse(escolhaJogador2) < 0 || int.Parse(escolhaJogador2) > 9)
+                // Casting do input do jogador
+                escolhaJogadorDois = int.Parse(escolhaJogador2);
+
+                // Checagem do intervalo [0-9]
+                if (escolhaJogadorDois < 0 || escolhaJogadorDois > 9)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.Write("\n\nNúmero não pertence ao intervalo [0-9] digite um número novamente: ");
@@ -136,6 +152,7 @@ namespace JogoDaVelha
                     escolhaJogador2 = novoNumero;
                 }
 
+                // Substituição na matriz do numero por X ou O
                 for (int linhas = 0; linhas < 3; linhas++)
                 {
                     for (int colunas = 0; colunas < 3; colunas++)
@@ -143,42 +160,49 @@ namespace JogoDaVelha
                         if (tabuleiro[linhas, colunas] == escolhaJogador2)
                         {
                             tabuleiro[linhas, colunas] = Program.jogador2.letraJogo;
+
                             System.Threading.Thread.Sleep(800);
                             Console.Clear();
-                            MostrarTabuleiro();
+
+                            // # Decorar o menu
+                            EstilizarMenu("Jogo da Velha", ConsoleColor.Red);
+
                         }
 
                     }
                 }
 
-            } while (int.Parse(escolhaJogador1) <= 0 && int.Parse(escolhaJogador1) >= 9 && int.Parse(escolhaJogador2) <= 0 && int.Parse(escolhaJogador2) >= 9);
 
-            while(int.Parse(escolhaJogador1) == int.Parse(escolhaJogador2))
-            {
-                // # Caso usuário escolha o mesmo numero já preenchido na matriz
-                if (int.Parse(escolhaJogador1) == int.Parse(escolhaJogador2))
+                // # Checagem para quando usuário escolha o mesmo numero já preenchido na matriz
+                while (escolhaJogadorUm == escolhaJogadorDois || escolhaJogadorDois == escolhaJogadorUm)
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.Write("\n\nNúmero já preenchido escolha outro: ");
-                    Console.ResetColor();
+                    if (int.Parse(escolhaJogador1) == int.Parse(escolhaJogador2))
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write("\n\nNúmero já preenchido escolha outro: ");
+                        Console.ResetColor();
 
-                    string novoNumero = Console.ReadLine();
-                    escolhaJogador2 = novoNumero;
-                }
-                else if (int.Parse(escolhaJogador2) == int.Parse(escolhaJogador1))
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.Write("\n\nNúmero já preenchido escolha outro: ");
-                    Console.ResetColor();
+                        string novoNumero = Console.ReadLine();
+                        escolhaJogador2 = novoNumero;
+                    }
+                    else if (int.Parse(escolhaJogador2) == int.Parse(escolhaJogador1))
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write("\n\nNúmero já preenchido escolha outro: ");
+                        Console.ResetColor();
 
-                    string novoNumero = Console.ReadLine();
-                    escolhaJogador1 = novoNumero;
+                        string novoNumero = Console.ReadLine();
+                        escolhaJogador1 = novoNumero;
+                    }
+                    else
+                    {
+                        break;
+                    }
                 }
-                else
-                {
-                    break;
-                }
-            }
+
+            } while (escolhaJogadorUm <= 0 && escolhaJogadorUm >= 9 && escolhaJogadorDois <= 0 && escolhaJogadorDois >= 9);
+
+            
         }
 
         // # Método para perguntar ao usuário se ele deseja jogar de novo

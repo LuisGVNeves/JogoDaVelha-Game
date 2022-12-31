@@ -14,13 +14,15 @@ namespace JogoDaVelha
         // # Criar a Matriz - 3 linhas e 3 colunas
         public static string[,] tabuleiro = new string[3, 3];
 
-        // # Variaveis globais para realizar as condições no método de verificar se houve empate
+        //  Variaveis globais para realizar a substituição do intervalo [0-9] por X ou O do método EscolhaJogador
         public static string escolhaJogador1;
         public static string escolhaJogador2;
 
+        // Variáveis para o método de pontuação
         public static int pontuacaoJogador1 = 0;
         public static int pontuacaoJogador2 = 0;
         public static int qtdEmpate = 0;
+
 
         // # Método que preenche tabuleiro com números, para o usuário preencher com X ou O
         public static void PreencherTabuleiro()
@@ -44,43 +46,54 @@ namespace JogoDaVelha
                     tabuleiro[2, 0] = "7";
                     tabuleiro[2, 1] = "8";
                     tabuleiro[2, 2] = "9";
-
-
                 }
 		    }
         }
+
 
         // # Método Mostrar Tabuleiro
         public static void MostrarTabuleiro()
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine($"\n\n                             {tabuleiro[0, 0]} | {tabuleiro[0, 1]} | {tabuleiro[0, 2]}");
-
-            Console.ForegroundColor = ConsoleColor.DarkGray;
-            Console.WriteLine("                            -----------");
-
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine($"                             {tabuleiro[1, 0]} | {tabuleiro[1, 1]} | {tabuleiro[1, 2]}");
-
-
-            Console.ForegroundColor = ConsoleColor.DarkGray;
-            Console.Write("                            -----------\n");
-
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine($"                             {tabuleiro[2, 0]} | {tabuleiro[2, 1]} | {tabuleiro[2, 2]}\n");
+            Console.WriteLine(@"
+                         ╔══════════╗");
             Console.ResetColor();
 
-
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine($"                           { tabuleiro[0, 0]} | {tabuleiro[0, 1]} | {tabuleiro[0, 2]}");
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.WriteLine("                          -----------");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine($"                           {tabuleiro[1, 0]} | {tabuleiro[1, 1]} | {tabuleiro[1, 2]}");
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.Write("                          -----------\n");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write($"                           {tabuleiro[2, 0]} | {tabuleiro[2, 1]} | {tabuleiro[2, 2]}");
+            Console.ResetColor();
+            
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(@"
+                         ╚══════════╝");
+            Console.ResetColor();
         }
 
-        // # Método para saber qual valor do intervalo [0-9] o usuário vai querer substituir pelo X ou O
+
+        /*
+            Verificação jogador 1 e 2:
+            - Pegar o input do jogador para saber qual valor da matriz ele deseja substituir pelo X ou O
+            - Verificar se esse input está no intervalo de [0-9]
+            - Por ultimo percorro a matriz novamente substituindo o Número do input que o usuário digitou, pela letra que
+            está no jogador
+            - Isso tudo está em loop infinito até que o usuário digite o número no intervalo correto da matriz [0-9]
+        */
         public static void EscolhaJogador(string jogarDeNovo)
         {
             do
             {
-                // Verifica se numero que usuario quer é maior que o intervalo [0-9]
                 Console.Write($"\nJogador {Program.jogador1.nome} - Escolha o valor do tabuleiro que você quer preencher {Program.jogador1.letraJogo}: ");
+
                 escolhaJogador1 = Console.ReadLine();
+                
                 if(int.Parse(escolhaJogador1) < 0 || int.Parse(escolhaJogador1) > 9)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
@@ -92,8 +105,27 @@ namespace JogoDaVelha
                 }
 
 
+                for (int linhas = 0; linhas < 3; linhas++)
+                {
+                    for (int colunas = 0; colunas < 3; colunas++)
+                    {
+                        if (tabuleiro[linhas,colunas] == escolhaJogador1)
+                        {
+                            tabuleiro[linhas, colunas] = Program.jogador1.letraJogo;
+                            System.Threading.Thread.Sleep(800);
+                            Console.Clear();
+                            MostrarTabuleiro();
+                        }
+
+                    }
+                }
+
+
+
                 Console.Write($"\nJogador {Program.jogador2.nome} - Escolha o valor do tabuleiro que você quer preencher com {Program.jogador2.letraJogo}: ");
+
                 escolhaJogador2 = Console.ReadLine();
+
                 if (int.Parse(escolhaJogador2) < 0 || int.Parse(escolhaJogador2) > 9)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
@@ -104,9 +136,22 @@ namespace JogoDaVelha
                     escolhaJogador2 = novoNumero;
                 }
 
+                for (int linhas = 0; linhas < 3; linhas++)
+                {
+                    for (int colunas = 0; colunas < 3; colunas++)
+                    {
+                        if (tabuleiro[linhas, colunas] == escolhaJogador2)
+                        {
+                            tabuleiro[linhas, colunas] = Program.jogador2.letraJogo;
+                            System.Threading.Thread.Sleep(800);
+                            Console.Clear();
+                            MostrarTabuleiro();
+                        }
 
-            }while (int.Parse(escolhaJogador1) <= 0 && int.Parse(escolhaJogador1) >= 9 && int.Parse(escolhaJogador2) <= 0 && int.Parse(escolhaJogador2) >= 9);
+                    }
+                }
 
+            } while (int.Parse(escolhaJogador1) <= 0 && int.Parse(escolhaJogador1) >= 9 && int.Parse(escolhaJogador2) <= 0 && int.Parse(escolhaJogador2) >= 9);
 
             while(int.Parse(escolhaJogador1) == int.Parse(escolhaJogador2))
             {
@@ -134,10 +179,6 @@ namespace JogoDaVelha
                     break;
                 }
             }
-
-
-
-
         }
 
         // # Método para perguntar ao usuário se ele deseja jogar de novo
@@ -159,7 +200,7 @@ namespace JogoDaVelha
                 switch (jogarDeNovo)
                 {
                     case "1":
-                        System.Threading.Thread.Sleep(2000);
+                        System.Threading.Thread.Sleep(1300);
                         Console.Clear();
 
                         // Interface do xadrex
@@ -170,7 +211,7 @@ namespace JogoDaVelha
                         PreencherTabuleiro();
                         break;
                     case "2":
-                        System.Threading.Thread.Sleep(2000);
+                        System.Threading.Thread.Sleep(1000);
                         Console.Clear();
 
                         // Interface do xadrex
@@ -202,7 +243,6 @@ namespace JogoDaVelha
                 for (int colunas = 0; colunas < 3; colunas++)
                 {
                     // # Verifica se a primeira, segunda, terceira linha da matriz teve as linhas prenchidas na ordem orizontal X X X
-                    
                     linhaHorizontalX = 
                     (
                         tabuleiro[0, 0] == "X" &&
@@ -222,9 +262,7 @@ namespace JogoDaVelha
                         tabuleiro[2, 2] == "X"
                      );
 
-
                     // # Verifica se a primeira, segunda, terceira linha da matriz teve as linhas prenchidas na ordem orizontal O O  O
-                    
                     linhaHorizontalO =
                     (
                         tabuleiro[0, 0] == "O" &&
@@ -266,7 +304,7 @@ namespace JogoDaVelha
             if (Program.jogador1.letraJogo == "O" && linhaHorizontalO)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine($"\n\nJogador {Program.jogador1.nome} Venceu a partida ! Horário: ");
+                Console.WriteLine($"\n\nJogador {Program.jogador1.nome} Venceu a partida ! ");
                 Console.ResetColor();
 
                 pontuacaoJogador1++;
@@ -280,7 +318,7 @@ namespace JogoDaVelha
             if (Program.jogador2.letraJogo == "X" && linhaHorizontalX)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine($"\n\nJogador {Program.jogador2.nome} Venceu a partida ! Horário: ");
+                Console.WriteLine($"\n\nJogador {Program.jogador2.nome} Venceu a partida ! ");
                 Console.ResetColor();
 
                 pontuacaoJogador2++;
@@ -294,7 +332,7 @@ namespace JogoDaVelha
             if (Program.jogador2.letraJogo == "O" && linhaHorizontalO)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine($"\n\nJogador {Program.jogador2.nome} Venceu a partida ! Horário: ");
+                Console.WriteLine($"\n\nJogador {Program.jogador2.nome} Venceu a partida !");
                 Console.ResetColor();
 
                 pontuacaoJogador2++;

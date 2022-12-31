@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,6 +19,7 @@ namespace JogoDaVelha
             this.nome = nome;
             this.pontuacao = pontuacao;
             this.letraJogo = letraJogo;
+
         }
 
 

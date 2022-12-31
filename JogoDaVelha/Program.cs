@@ -45,7 +45,7 @@ namespace JogoDaVelha
         public static void Main(string[] args)
         {
             // # Menu inicial
-            EstilizarMenu("BEM-VINDO AO JOGO DA VELHA", ConsoleColor.Red);
+            EstilizarMenu("BEM-VINDO AO JOGO DA VELHA SHARP CODERS", ConsoleColor.Red);
 
 
             // # Variável escolha do usuário
@@ -57,12 +57,20 @@ namespace JogoDaVelha
 
                 if (escolhaUsuario == "SIM")
                 {
-
+                    
                     Console.Write("\nDigite o nome do 1 jogador: ");
+
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
                     jogador1.nome = Console.ReadLine();
+                    Console.ResetColor();
+
 
                     Console.Write("Digite o nome do 2 jogador: ");
+                    
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
                     jogador2.nome = Console.ReadLine();
+                    Console.ResetColor();
+
 
                     Console.Write("\nJogador 1 qual você quer ser? letra X ou O: ");
                     jogador1.letraJogo = Console.ReadLine().ToUpper();
@@ -77,8 +85,10 @@ namespace JogoDaVelha
                         jogador2.letraJogo = "X";
                     }
 
+                    Console.WriteLine("\n------------------------------------------------------------");
                     Console.WriteLine($"\nJogador {jogador1.nome} começa com: {jogador1.letraJogo}");
-                    Console.WriteLine($"\nJogador {jogador2.nome} começa com: {jogador2.letraJogo}");
+                    Console.WriteLine($"\nJogador {jogador2.nome} começa com: {jogador2.letraJogo}\n");
+                    Console.WriteLine("------------------------------------------------------------");
 
                     // # Inicia o game
                     IniciarJogo();
